@@ -1,6 +1,8 @@
 package model.dao;
 
 import java.sql.*;
+import java.util.ArrayList;
+
 import model.dto.UsersDTO;
 
 public class UsersDAO extends BaseDAO {
@@ -35,8 +37,8 @@ public class UsersDAO extends BaseDAO {
             String sql = "SELECT * FROM Users WHERE u_student_id = ? AND u_pwd = ? ";
             PreparedStatement ps = conn.prepareStatement(sql);
 
-            ps.setString(5, dto.getU_student_id());
-            ps.setString(5, dto.getU_student_id());
+            ps.setString(1, dto.getU_student_id());
+            ps.setString(2, dto.getU_pwd());
 
             ResultSet rs = ps.executeQuery(); // insert는 update지만 select는 query를 사용
 
@@ -96,7 +98,7 @@ public class UsersDAO extends BaseDAO {
     }
 
     public boolean checkID( String id ) {
-        boolean result = false;
+        boolean result = true;
         try{
             String sql = "SELECT * FROM Users WHERE u_id = ? ";
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -104,7 +106,7 @@ public class UsersDAO extends BaseDAO {
             ResultSet rs = ps.executeQuery();
             
             if (rs.next()) {
-                result = true;
+                result = false;
             }
 
             rs.close();
@@ -112,4 +114,60 @@ public class UsersDAO extends BaseDAO {
         } catch ( Exception e ) { e.printStackTrace(); }
         return result;
     }
+
+    public UsersDTO getUserInfo( int u_no ) {
+        UsersDTO user = null;
+        try{
+            String sql = "SELECT * FROM Users WHERE u_no = ? ";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, u_no);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                user = new UsersDTO(
+                    rs.getInt("u_no"),
+                    rs.getString("u_id"),
+                    rs.getString("u_pwd"),
+                    rs.getString("u_phone"),
+                    rs.getString("u_name"),
+                    rs.getString("u_grade"),
+                    rs.getString("u_student_id")
+                );
+            }
+            rs.close();
+            ps.close();
+        } catch ( Exception e ) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+
+    public ArrayList<UsersDTO> selectAllUsers() {
+        ArrayList<UsersDTO> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM Users";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                UsersDTO user = new UsersDTO(
+                    rs.getInt("u_no"),
+                    rs.getString("u_id"),
+                    rs.getString("u_pwd"),
+                    rs.getString("u_phone"),
+                    rs.getString("u_name"),
+                    rs.getString("u_grade"),
+                    rs.getString("u_student_id")
+                );
+                list.add(user);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) { 
+            e.printStackTrace(); 
+        }
+        return list;
+    }
+
 } // class end

@@ -31,8 +31,12 @@ public class EquipmentDAO extends BaseDAO {
     return false;
 }
 
+<<<<<<< HEAD
      
     // 전체 장비 조회 (전체 장비 목록 보기)
+=======
+    // 전체 장비 조회
+>>>>>>> 9b6117fb276099b0a94ffbfd31d27b45a712eac9
   public ArrayList<Object> findAll() {
     ArrayList<Object> list = new ArrayList<>();
             try {String sql = "SELECT * FROM equipment";

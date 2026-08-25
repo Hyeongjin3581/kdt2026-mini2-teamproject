@@ -74,8 +74,11 @@ public class RentalDTO {
         this.rCondition = rCondition;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "RentalDTO [rNo=" + rNo + ", uNo=" + uNo + ", eNo=" + eNo + ", rentalTime=" + rentalTime + ", rStatus="
+                + rStatus + ", rCondition=" + rCondition + "]";
+    }
 
 } // class end
 

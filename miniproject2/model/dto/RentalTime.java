@@ -1,8 +1,5 @@
 package model.dto;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 public class RentalTime {
     private String rdate;
     private String rduedate;

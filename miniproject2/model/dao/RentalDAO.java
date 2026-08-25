@@ -60,12 +60,10 @@ public class RentalDAO extends BaseDAO {
 public ArrayList<RentalDTO>rentalListPrint(){
     // RentalDto를 매개변수타입으로 지정. 
     ArrayList<RentalDTO> rentalList = new ArrayList<>();
-    
-
 
     // 기재된 sql 문 반환. 
     String sql = "SELECT * FROM rental";
-    PreparedStatement ps = null;
+    PreparedStatement ps = conn.prepareStatement( sql );
 
 
 

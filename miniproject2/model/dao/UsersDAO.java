@@ -5,16 +5,19 @@ import java.util.ArrayList;
 
 import model.dto.UsersDTO;
 
+// 싱글톤 패턴
 public class UsersDAO extends BaseDAO {
     private UsersDAO (){}; 
     private static final UsersDAO instance = new UsersDAO();
     public static UsersDAO getInstance() { return instance; }
 
-
-    public boolean signup( UsersDTO dto ) {
+    // 회원가입
+    public boolean signup( UsersDTO dto ) { 
         boolean result = false; // 기본값 false
         try{
+            // 회원 정보 추가
             String sql = "insert into Users (u_id, u_pwd, u_phone, u_name, u_student_id) values (?, ?, ?, ?, ?)";
+            // PreparedStatement 객체 생성
             PreparedStatement ps = conn.prepareStatement(sql);
 
             ps.setString(1, dto.getU_id());
@@ -22,15 +25,16 @@ public class UsersDAO extends BaseDAO {
             ps.setString(3, dto.getU_phone());
             ps.setString(4, dto.getU_name());
             ps.setString(5, dto.getU_student_id());
-            int rows = ps.executeUpdate(); // DB에 들어간 줄(row) 수 확인 
-            result = (rows == 1); // 1줄이 들어갔으면 true 아니면 false 
+            int rows = ps.executeUpdate(); // DB에 들어간 줄(row) 수 확인 성공하면 1 실패시 0
+            result = (rows == 1); // 위에서 제대로 실행 됐으면 true 아닐시 false 
 
             ps.close();
 
-        }catch( Exception e ) { e.printStackTrace(); } // 에러 추적
+        }catch( Exception e ) { e.printStackTrace(); } // 중간에 에러 발생시 에러 내용 콘솔에 출력
         return result; // try end
     } // signup end
 
+    // 로그인
     public UsersDTO login( UsersDTO dto ) {
         UsersDTO loginUser = null; // 기본값 null
         try{
@@ -61,6 +65,7 @@ public class UsersDAO extends BaseDAO {
         return loginUser; // 성공하면 유저 정보 실패하면 null
     }
 
+    // 학번 유효성 검사
     public boolean checkStudentId( String studentId ) {
         boolean result = false;
         try{
@@ -79,6 +84,7 @@ public class UsersDAO extends BaseDAO {
         return result;
     }
 
+    // 연락처 유효성 검사
     public boolean checkPhone( String phone ) {
         boolean result = true;
         try{
@@ -97,6 +103,7 @@ public class UsersDAO extends BaseDAO {
         return result;
     }
 
+    // 아이디 중복 확인
     public boolean checkID( String id ) {
         boolean result = true;
         try{
@@ -115,6 +122,7 @@ public class UsersDAO extends BaseDAO {
         return result;
     }
 
+    // 회원 상세 조회
     public UsersDTO getUserInfo( int u_no ) {
         UsersDTO user = null;
         try{
@@ -143,6 +151,7 @@ public class UsersDAO extends BaseDAO {
     }
 
 
+    // 전체회원조회(관리자용)
     public ArrayList<UsersDTO> selectAllUsers() {
         ArrayList<UsersDTO> list = new ArrayList<>();
         try {

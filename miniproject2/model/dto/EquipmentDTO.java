@@ -19,7 +19,7 @@ public class EquipmentDTO {
         this.l_NO = l_NO;
     }
 
-    // 4. 신규 등록용 생성자 (e_No 제외)
+    // 4. 신규 등록용 생성자 
     public EquipmentDTO(String e_Name, String e_Category, String e_Status, int l_NO) {
         this.e_Name = e_Name;
         this.e_Category = e_Category;

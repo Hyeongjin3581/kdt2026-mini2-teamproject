@@ -28,10 +28,5 @@ public class BaseDAO {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'save'");
     }
-    public ArrayList<Object> findAll() {
-        return new ArrayList<>();
-    }
+ 
 }
-
-
-

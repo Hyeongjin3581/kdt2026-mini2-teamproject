@@ -2,6 +2,7 @@ package model.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.ArrayList;
 
 public class BaseDAO {
     String URL = "jdbc:mysql://localhost:3306/SmartLocker";
@@ -22,5 +23,14 @@ public class BaseDAO {
     protected BaseDAO() { 
         connect(); 
     }
+    public boolean save(Object obj) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'save'");
+    }
+    public ArrayList<Object> findAll() {
+        return new ArrayList<>();
+    }
 }
+
+
 

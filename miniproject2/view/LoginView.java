@@ -54,4 +54,29 @@ public class LoginView {
             System.out.println("[안내] 회원가입에 실패했습니다.");
         }
     }
+
+    public void login(){
+        System.out.println("학번"); String studentid = scan.next();
+        System.out.println("비밀번호"); String pwd = scan.next();
+
+        boolean result = lc.login(studentid, pwd);
+
+        if (result){
+            UsersDTO loginUsers = lc.getLoginUser();
+            System.out.println("[안내] 로그인에 성공했습니다.");
+            System.out.println("[안내] " + loginUsers.getU_name() + "님 환영합니다.");
+
+            if ( loginUsers.getU_grade().equals("admin")) {
+            AdminView.getInstance().run();
+            }
+            else {
+            StudentView.getInstance().run();
+            }
+
+        } else {
+            System.out.println("학번 또는 비밀번호가 일치하지 않습니다.");
+        }
+            
+        
+    }
 }

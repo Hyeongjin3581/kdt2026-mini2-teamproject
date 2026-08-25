@@ -142,7 +142,6 @@ public class UsersDAO extends BaseDAO {
         return user;
     }
 
-
     public ArrayList<UsersDTO> selectAllUsers() {
         ArrayList<UsersDTO> list = new ArrayList<>();
         try {

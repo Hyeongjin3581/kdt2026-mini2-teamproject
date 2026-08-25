@@ -5,13 +5,13 @@ use SmartLocker;
 CREATE TABLE Users (
   u_no int auto_increment,
   constraint primary key (u_no),
-  u_id varchar(15) not null unique,
   u_pwd varchar(15) not null,
   u_phone varchar(20) not null,
   u_name varchar(20) not null,
   u_grade varchar(10) default 'user',
   u_student_id varchar(20) not null unique
 );
+
 CREATE TABLE Equipment (
     e_no  int auto_increment ,
     e_name varchar(50) not null,
@@ -54,9 +54,3 @@ create table Report (
     constraint primary key (report_id),
     constraint foreign key (r_no) references rental (r_no)
 );
-
-select * from Users;
-select * from Locker;
-select * from Equipment;
-select * from Rental;
-select * from Report;

@@ -2,17 +2,14 @@ package model.dto;
 
 public class UsersDTO {
     private int u_no;
-    private String u_id;
     private String u_pwd;
     private String u_phone;
     private String u_name;
     private String u_grade;
     private String u_student_id;
-
-    public UsersDTO(int u_no, String u_id, String u_pwd, String u_phone, String u_name, String u_grade,
-            String u_student_id) {
+    
+    public UsersDTO(int u_no, String u_pwd, String u_phone, String u_name, String u_grade, String u_student_id) {
         this.u_no = u_no;
-        this.u_id = u_id;
         this.u_pwd = u_pwd;
         this.u_phone = u_phone;
         this.u_name = u_name;
@@ -26,14 +23,6 @@ public class UsersDTO {
 
     public void setU_no(int u_no) {
         this.u_no = u_no;
-    }
-
-    public String getU_id() {
-        return u_id;
-    }
-
-    public void setU_id(String u_id) {
-        this.u_id = u_id;
     }
 
     public String getU_pwd() {
@@ -78,8 +67,8 @@ public class UsersDTO {
 
     @Override
     public String toString() {
-        return "UsersDAO [u_no=" + u_no + ", u_id=" + u_id + ", u_pwd=" + u_pwd + ", u_phone=" + u_phone + ", u_name="
-                + u_name + ", u_grade=" + u_grade + ", u_student_id=" + u_student_id + "]";
+        return "UsersDTO [u_no=" + u_no + ", u_pwd=" + u_pwd + ", u_phone=" + u_phone + ", u_name=" + u_name
+                + ", u_grade=" + u_grade + ", u_student_id=" + u_student_id + "]";
     }
 
 }

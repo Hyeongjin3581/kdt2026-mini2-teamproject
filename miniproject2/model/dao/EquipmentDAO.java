@@ -1,4 +1,5 @@
 package model.dao;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class EquipmentDAO extends BaseDAO {
 }
 
      
-    // 전체 장비 조회
+    // 전체 장비 조회 (전체 장비 목록 보기)
   public ArrayList<Object> findAll() {
     ArrayList<Object> list = new ArrayList<>();
             try {String sql = "SELECT * FROM equipment";
@@ -49,8 +50,31 @@ public class EquipmentDAO extends BaseDAO {
             }
         }catch (Exception e) {System.out.println("장비조회 실패" + e);}
         return list;    
-    } // class end
-}
+    } 
+
+     // 3. 장비 상세 조회 (장비 검색)
+    public EquipmentDTO e_find(int e_No) {
+        String sql = "SELECT * FROM equipment WHERE e_no = ?";
+            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                pstmt.setInt(1, e_No);
+                try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                return new EquipmentDTO(
+                    rs.getInt("e_no"),
+                    rs.getString("e_name"),
+                    rs.getString("e_category"),
+                    rs.getString("e_status"),
+                    rs.getInt("l_no")
+                    );
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+} // class end
 
 
 

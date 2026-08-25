@@ -2,6 +2,7 @@ package model.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 import model.dto.RentalDTO;
 import model.dto.RentalTime;
@@ -56,23 +57,32 @@ public class RentalDAO extends BaseDAO {
         return result;
     } // rentalNoCheck end
 
-//[2] 전체 대여목록 조회
-public ArrayList<RentalDTO>rentalListPrint(){
-    // RentalDto를 매개변수타입으로 지정. 
-    ArrayList<RentalDTO> rentalList = new ArrayList<>();
+    //[2] 전체 대여목록 조회
+    public ArrayList<RentalDTO>rentalListPrint(){
+        // RentalDto를 매개변수타입으로 지정. 
+        ArrayList<RentalDTO> rentalList = new ArrayList<>();
+        try{
+            // 기재된 sql 문 반환. 
+            String sql = "SELECT * FROM rental";
+            PreparedStatement ps = conn.prepareStatement( sql );
+            ResultSet rs =  ps.executeQuery(); // 2.4 기재된 SQL 실행 , .executeQuery() select
+            // 2.5 SQL 결과( select 조회 결과는 항상 테이블로 반환한다. ) 즉] 레코드 하나씩 타입변환
+            while( rs.next() ){ // rs.next() : 다음 레코드(행) 이동 , 마지막 레코드까지 하나씩 이동 반복 뜻 // 레코드 수만큼 반복
+                // 2.6 현재 레코드의 필드값 들을 --> DTO 변환
+                RentalDTO rantalDto = new RentalDTO(); 
+                rantalDto.setrNo( rs.getInt("rno") ); // rs.get타입( "가져올속성명" )
+                rantalDto.setuNo( rs.getInt("uNo") );
+                rantalDto.seteNo( rs.getInt("eNo") );
+                rantalDto.setRentalTime(rs.getRentalTime("rentalTime"));
+                rantalDto.setrStatus(rs.getString("rStatus"));
+                rantalDto
+                // 2.7 변환한 DTO --> 리스트에 담기
+                list.add( rantalDto );
+            }
+        }catch( SQLException e ){ System.out.println(e); } 
+        // 2.8 리스트 반환
+        return list; 
 
-    // 기재된 sql 문 반환. 
-    String sql = "SELECT * FROM rental";
-    PreparedStatement ps = conn.prepareStatement( sql );
-
-
-
-
-
-
-
-} // rentalListPrint end
-
-
-
+         }
+    } // rentalListPrint end
 }   // class end

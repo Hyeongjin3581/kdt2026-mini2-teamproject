@@ -5,9 +5,9 @@ public class RentalDTO {
     private int rNo;
     private int uNo;
     private int eNo;
-
-    // String 멤버변수 (대여일, 반납예정일, 실제반납일은  rentalTime으로 묶어서 멤버변수로 받아 사용.)
-    private RentalTime rentalTime;
+    private String rdate;
+    private String rduedate;
+    private String rreturndate;
     private String rStatus;
     private String rCondition;
 
@@ -16,14 +16,39 @@ public class RentalDTO {
     public RentalDTO(){}
 
     // 매개변수와 매개인자를 받는 생성자 생성
-    public RentalDTO(int rNo, int uNo, int eNo, RentalTime rentalTime, String rStatus, String rCondition){
+    public RentalDTO(int rNo, int uNo, int eNo,String rdate,String rduedate,String rreturndate , String rStatus, String rCondition){
         this.rNo = rNo;
         this.uNo = uNo;
         this.eNo = eNo;
-
-        this.rentalTime = rentalTime;
+        this.rdate = rdate;
+        this.rduedate = rduedate;
+        this.rreturndate = rreturndate;
         this.rStatus = rStatus;
         this.rCondition = rCondition;
+    }
+
+    public String getRdate() {
+        return rdate;
+    }
+
+    public void setRdate(String rdate) {
+        this.rdate = rdate;
+    }
+
+    public String getRduedate() {
+        return rduedate;
+    }
+
+    public void setRduedate(String rduedate) {
+        this.rduedate = rduedate;
+    }
+
+    public String getRreturndate() {
+        return rreturndate;
+    }
+
+    public void setRreturndate(String rreturndate) {
+        this.rreturndate = rreturndate;
     }
 
     public int getrNo() {
@@ -50,14 +75,6 @@ public class RentalDTO {
         this.eNo = eNo;
     }
 
-    public RentalTime getRentalTime() {
-        return rentalTime;
-    }
-
-    public void setRentalTime(RentalTime rentalTime) {
-        this.rentalTime = rentalTime;
-    }
-
     public String getrStatus() {
         return rStatus;
     }
@@ -76,8 +93,8 @@ public class RentalDTO {
 
     @Override
     public String toString() {
-        return "RentalDTO [rNo=" + rNo + ", uNo=" + uNo + ", eNo=" + eNo + ", rentalTime=" + rentalTime + ", rStatus="
-                + rStatus + ", rCondition=" + rCondition + "]";
+        return "RentalDTO [rNo=" + rNo + ", uNo=" + uNo + ", eNo=" + eNo + ", rdate=" + rdate + ", rduedate=" + rduedate
+                + ", rreturndate=" + rreturndate + ", rStatus=" + rStatus + ", rCondition=" + rCondition + "]";
     }
 
 } // class end

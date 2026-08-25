@@ -30,7 +30,6 @@ public class EquipmentDAO extends BaseDAO {
     return false;
 }
 
-     
     // 전체 장비 조회
   public ArrayList<Object> findAll() {
     ArrayList<Object> list = new ArrayList<>();

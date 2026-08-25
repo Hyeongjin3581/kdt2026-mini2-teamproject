@@ -1,6 +1,9 @@
 package model.dao;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
+
+import javax.naming.spi.DirStateFactory.Result;
 
 import model.dto.EquipmentDTO;
 
@@ -29,10 +32,26 @@ public class EquipmentDAO extends BaseDAO {
 
      
     // 전체 장비 조회
-  public ArrayList<Object> findAll(); {
-    
-  }
-    
+  public ArrayList<Object> findAll() {
+    ArrayList<Object> list = new ArrayList<>();
+            try {String sql = "SELECT * FROM equipment";
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery();
+                while(rs.next()) {
+                EquipmentDTO equipmentDTO = new EquipmentDTO(
+                rs.getInt("e_No"),
+                rs.getString("e_Name"),
+                rs.getString("e_Category"),
+                rs.getString("e_Status"),
+                rs.getInt("l_NO")
+                );
+                list.add(equipmentDTO);
+            }
+        }catch (Exception e) {System.out.println("장비조회 실패" + e);}
+        return list;    
+    } // class end
+}
 
-} // class end
+
+
 

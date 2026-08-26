@@ -12,13 +12,10 @@ import model.dto.RentalDTO;
 public class RentalDAO extends BaseDAO {
     // 싱글톤 생성
     private RentalDAO(){}
-    // 싱글톤 생성
-    private RentalDAO(){}
     private static final RentalDAO instance = new RentalDAO();
     public static RentalDAO getInstance() { return instance; }  
 
     // [1] 대여번호 유효성 검사
-    public boolean rentalNoCheck(int r_no) {
     public boolean rentalNoCheck(int r_no) {
         boolean result = false;
         String sql = "SELECT r_no FROM rental WHERE r_no = ?";
@@ -26,9 +23,6 @@ public class RentalDAO extends BaseDAO {
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
     
-            ps.setInt(1, r_no);
-
-        try (PreparedStatement ps = conn.prepareStatement(sql)) {
     
             ps.setInt(1, r_no);
             // 4. SQL 실행 및 결과 받아오기  / excute --> 실행 // excuteUpdate --> ps( SQL기재된 인터페이스 SQL 실행)(반환타입 int임.) 성공 : 1 , 실패 : 0
@@ -38,9 +32,7 @@ public class RentalDAO extends BaseDAO {
             }
         } catch (Exception e) {
             System.out.println(e);} 
-            System.out.println(e);} 
         return result;
-    } // [1] end
     } // [1] end
 
     //[2] 전체 대여목록 조회

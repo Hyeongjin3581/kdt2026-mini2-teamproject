@@ -1,9 +1,9 @@
+import java.util.Scanner;
 
-import view.RentalAdminView;
+import view.LoginView;
 
 public class AppStart {
     public static void main(String[] args) {
-        RentalAdminView.getInstance().run( );
-        System.out.println("시작");
+        LoginView.getInstance().run();
     }
 }

@@ -5,7 +5,6 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import model.dto.RentalDTO;
-import controller.RentalController;
 import controller.StudentController;
 
 public class RentalStudentView {
@@ -15,7 +14,7 @@ public class RentalStudentView {
 
 
     // 싱글톤 호출
-    private StudentController rc = StudentController.getInstance();
+    private StudentController sc = StudentController.getInstance();
 
 
     private Scanner scan = new Scanner(System.in);

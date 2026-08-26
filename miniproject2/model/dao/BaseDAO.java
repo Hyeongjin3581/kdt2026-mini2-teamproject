@@ -4,8 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.ArrayList;
 
+
 // 연동 정보
-public class BaseDAO {
+public  class BaseDAO {
     String URL = "jdbc:mysql://localhost:3306/SmartLocker";
     String USER = "root";
     String PASSWORD = "1234";
@@ -24,11 +25,11 @@ public class BaseDAO {
     protected BaseDAO() { 
         connect(); 
     }
-    public boolean save(Object obj) {
+    public  boolean save(Object obj) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'save'");
     }
-    public ArrayList<Object> findAll() {
+    public  ArrayList<?> findAll() {
         return new ArrayList<>();
     }
 }

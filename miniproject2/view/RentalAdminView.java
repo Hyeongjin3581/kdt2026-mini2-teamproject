@@ -23,12 +23,21 @@ public class RentalAdminView {
     public void run( ){
         while(true){
             try{
-                System.out.print("----------------------------------------------------------------------------------\n");
-                System.out.print("|  1. 전체 대여목록 조회(관리자)  /   2.단일 대여현황 조회( 사용자 & 관리자 )  |\n" );
-                System.out.print("--------------------------------------------------------------------------------\n");
+                System.out.print(
+                        "\n==========================================" +
+                        "\n 대여 관리" +
+                        "\n==========================================" +
+                        "\n 1. 전체 대여목록 조회" +
+                        "\n 2. 사용자 단일 대여현황 조회" +
+                        "\n 0. 이전 메뉴" +
+                        "\n==========================================" +
+                        "\n 선택 : "
+                );
                 int ch = scan.nextInt();
                 if( ch==1 ){ rentalListPrint(); }
                 else if( ch == 2){ uRentListPrint(); }
+                else if( ch == 0){ return; }
+                else{ System.out.println("잘못된 입력");}
             }catch(InputMismatchException e ){
                 scan = new Scanner(System.in);
                 System.out.println("[다시입력] "  + e);

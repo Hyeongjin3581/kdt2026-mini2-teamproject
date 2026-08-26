@@ -5,6 +5,11 @@ import java.util.Scanner;
 import controller.LoginController;
 import model.dto.UsersDTO;
 
+import java.util.Scanner;
+
+import controller.LoginController;
+import model.dto.UsersDTO;
+
 public class LoginView {
     private LoginView(){}
     private static final LoginView instance = new LoginView();

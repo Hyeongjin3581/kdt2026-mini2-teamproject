@@ -5,15 +5,15 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import model.dto.RentalDTO;
-import controller.RentalController;
+import controller.AdminController;
 
 public class RentalAdminView {
     private RentalAdminView(){} // 1.
     private static final RentalAdminView instance = new RentalAdminView(); // 2.
     public static RentalAdminView getInstance(){return instance;} // 3.  
 
-    // Rentalcontroller 싱글톤 호출
-    private RentalController rc = RentalController.getInstance();
+
+    private AdminController rc = AdminController.getInstance();
 
 
     // scanner 설정 (테스트용 / 추후 Admin / Student에서 통합 사용)

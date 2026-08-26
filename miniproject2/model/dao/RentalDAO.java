@@ -3,6 +3,7 @@ package model.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLException;
 import java.util.*;
 import model.dto.RentalDTO;
 
@@ -11,14 +12,21 @@ import model.dto.RentalDTO;
 public class RentalDAO extends BaseDAO {
     // 싱글톤 생성
     private RentalDAO(){}
+    // 싱글톤 생성
+    private RentalDAO(){}
     private static final RentalDAO instance = new RentalDAO();
     public static RentalDAO getInstance() { return instance; }  
 
     // [1] 대여번호 유효성 검사
     public boolean rentalNoCheck(int r_no) {
+    public boolean rentalNoCheck(int r_no) {
         boolean result = false;
         String sql = "SELECT r_no FROM rental WHERE r_no = ?";
         ResultSet rs = null;
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+    
+            ps.setInt(1, r_no);
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
     
@@ -30,7 +38,9 @@ public class RentalDAO extends BaseDAO {
             }
         } catch (Exception e) {
             System.out.println(e);} 
+            System.out.println(e);} 
         return result;
+    } // [1] end
     } // [1] end
 
     //[2] 전체 대여목록 조회

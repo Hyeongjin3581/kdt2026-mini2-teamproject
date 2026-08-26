@@ -32,6 +32,7 @@ public class StudentView {
                 System.out.print(" 메뉴 선택 : ");
 
             int ch = scan.nextInt();
+            
 
             }catch( Exception e ){ System.out.println( e ); }
         }

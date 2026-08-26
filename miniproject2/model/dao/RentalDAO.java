@@ -37,9 +37,10 @@ public class RentalDAO extends BaseDAO {
     public  ArrayList<RentalDTO>rentalListPrint(){
         // RentalDto를 매개변수타입으로 지정. 
         ArrayList<RentalDTO> rentalList = new ArrayList<>();
-        String sql = "SELECT * FROM rental";
-
-        try (PreparedStatement ps = conn.prepareStatement( sql )) {
+    
+        try {
+            String sql = "SELECT * FROM Rental";
+            PreparedStatement ps = conn.prepareStatement( sql ); 
             ResultSet rs =  ps.executeQuery();  // 2.4 기재된 SQL 실행 , .executeQuery() select
             // 2.5 SQL 결과( select 조회 결과는 항상 테이블로 반환한다. ) 즉] 레코드 하나씩 타입변환
             while( rs.next() ){ // rs.next() : 다음 레코드(행) 이동 , 마지막 레코드까지 하나씩 이동 반복 뜻 // 레코드 수만큼 반복
@@ -98,6 +99,7 @@ public class RentalDAO extends BaseDAO {
         return false;
     } // [4] end
 
+    // [5] 사용자 개인 대여현황 조회 
     public ArrayList<RentalDTO> uRentListPrint(int u_no) {
         ArrayList<RentalDTO> uRentList = new ArrayList<>();
         String sql = "SELECT r_no, e_no, r_date, r_due_date, r_return_date, r_status, r_condition FROM rental WHERE u_no = ?"; 

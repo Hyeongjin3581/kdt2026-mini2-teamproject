@@ -7,13 +7,12 @@ import model.dto.EquipmentDTO;
 
 public class EquipmentView {
 
-    private EquipmentView() {}
+    private EquipmentView(){}
     private static final EquipmentView instance = new EquipmentView();
     public static EquipmentView getInstance() {return instance;}
 
-
     // 컨트롤러
-    private AdminController adminController = AdminController.AdminController();
+    private AdminController adminController = AdminController.getInstance();
 
     // 입력
     private Scanner scan = new Scanner(System.in);

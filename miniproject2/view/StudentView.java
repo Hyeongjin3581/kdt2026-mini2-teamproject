@@ -119,43 +119,41 @@ public class StudentView {
         }
     }
 
-// [4] 내 대여 현황
-public void uRentListPrint(){
+    // [4] 내 대여 현황
+    public void uRentListPrint(){
 
-    // 로그인한 사용자의 회원번호 가져오기
-    int uNo = LoginController.getInstance().getLoginUser().getU_no();
+        // 로그인한 사용자의 회원번호 가져오기
+        int uNo = LoginController.getInstance().getLoginUser().getU_no();
 
-    ArrayList<RentalDTO> userResult = sc.uRentListPrint(uNo);
+        ArrayList<RentalDTO> userResult = sc.uRentListPrint(uNo);
 
-    System.out.println();
-    System.out.println("===== 내 대여 현황 =====");
-    System.out.println("회원번호 : " + uNo);
+        System.out.println();
+        System.out.println("===== 내 대여 현황 =====");
+        System.out.println("회원번호 : " + uNo);
 
-    if(userResult.isEmpty()){
-        System.out.println("대여 내역이 없습니다.");
-    }
-    else{
-                System.out.printf("%-8s %-8s %-20s %-20s %-12s%n",
-                "대여번호",
-                "장비번호",
-                "대여일",
-                "반납예정일",
-                "상태");
-        for(RentalDTO dto : userResult){
-            System.out.printf("%-8d %-8d %-20s %-20s %-12s%n",
-                 dto.getR_no(),
-                 dto.getE_no(),
-                dto.getR_date(), 
-                dto.getR_due_date(), 
-                dto.getR_return_date(), 
-                dto.getR_status()
-                
-            );
+        if(userResult.isEmpty()){
+            System.out.println("대여 내역이 없습니다.");
+        }
+        else{
+            System.out.printf("%-8s %-8s %-20s %-20s %-12s%n",
+                    "대여번호",
+                    "장비번호",
+                    "대여일",
+                    "반납예정일",
+                    "상태");
+            for(RentalDTO dto : userResult){
+                System.out.printf("%-8d %-8d %-20s %-20s %-12s%n",
+                    dto.getR_no(),
+                    dto.getE_no(),
+                    dto.getR_date(), 
+                    dto.getR_due_date(), 
+                    dto.getR_return_date(), 
+                    dto.getR_status()
+                    
+                );
+            }
         }
     }
-}
-
-    // 5. 장비 반납
 
     //[3] 장비반납신청(사용자)
     public void returnUpdate(){

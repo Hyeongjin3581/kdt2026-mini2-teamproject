@@ -6,10 +6,12 @@ import model.dao.EquipmentDAO;
 import model.dao.LockerDAO;
 import model.dao.RentalDAO;
 import model.dao.ReportDAO;
+import model.dao.UsersDAO;
 import model.dto.EquipmentDTO;
 import model.dto.LockerDTO;
 import model.dto.RentalDTO;
 import model.dto.ReportDTO;
+import model.dto.UsersDTO;
 
 public class AdminController {
 
@@ -21,6 +23,7 @@ public class AdminController {
     private LockerDAO lockerDAO = LockerDAO.getInstance();
     private RentalDAO rd = RentalDAO.getInstance();
     private ReportDAO reportDAO = ReportDAO.getInstance();
+    private UsersDAO usersDAO = UsersDAO.getInstance();
 
     // ===================== 장비 =====================
 
@@ -154,4 +157,11 @@ public class AdminController {
     public ArrayList<RentalDTO> uRentListPrint(int u_no) {
         return rd.uRentListPrint(u_no);
     }
+
+    // ===================== 회원 =====================
+    // 전체 회원 조회 (관리자용)
+    public ArrayList<UsersDTO> selectAllUsers() {
+        return usersDAO.selectAllUsers();
+    }   
+
 }

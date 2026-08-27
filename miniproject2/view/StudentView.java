@@ -9,6 +9,7 @@ import model.dto.EquipmentDTO;
 import model.dto.RentalDTO;
 
 public class StudentView {
+    private int u_no;
     private StudentView(){};
     private static final StudentView instance = new StudentView();
     public static StudentView getInstance() { return instance; }
@@ -92,66 +93,67 @@ public class StudentView {
     }
 
 
-    // 3. 장비 대여
-    public void rentalAdd(){
-        System.out.println("회원번호 입력"); int 회원번호 = scan.nextInt();
-        System.out.println("장비번호 입력"); int 장비번호 = scan.nextInt();
-        RentalDTO rentalDTO = new RentalDTO(회원번호,장비번호);
+    // [3] 대여신청 (사용자)
+    public void rentalAdd() {
+        System.out.println();
+        System.out.println("===== 장비 대여 =====");
+
+        // 로그인한 사용자의 회원번호 가져오기
+        int uNo = LoginController.getInstance().getLoginUser().getU_no();
+
+        System.out.println("본인의 회원번호 : " + uNo);
+
+        System.out.print("대여할 장비번호 입력 : ");
+        int eNo = scan.nextInt();
+
+        RentalDTO rentalDTO = new RentalDTO();
+        rentalDTO.setU_no(uNo);
+        rentalDTO.setE_no(eNo);
+
         boolean result = sc.rentalAdd(rentalDTO);
-        if( result ){System.out.println("대여성공");}
-        else{System.out.println("대여실패");}
-    }
-    // public void rentalAdd() {
-    //     System.out.println();
-    //     System.out.println("===== 장비 대여 =====");
-    //     System.out.print("대여할 장비번호 입력 : ");
-    //     int eNo = scan.nextInt();
 
-    //     int uNo = LoginController.getInstance().getLoginUser().getU_no();
-
-    //     RentalDTO rentalDTO = new RentalDTO();
-    //     rentalDTO.setU_no(uNo);
-    //     rentalDTO.setE_no(eNo);
-
-    //     boolean result = sc.rentalAdd(rentalDTO);
-
-    //     if (result) {
-    //         System.out.println("대여 신청이 완료되었습니다.");
-    //     } else {
-    //         System.out.println("대여 신청에 실패했습니다.");
-    //     }
-    // }
-
-
-    // 4. 내 대여 현황
-
-    public void uRentListPrint(){
-        System.out.print("조회할 사용자번호 : "); int 조회번호 = scan.nextInt();
-        ArrayList<RentalDTO> userResult = sc.uRentListPrint(조회번호);
-        for(RentalDTO dto : userResult){
-            System.out.println("|" +dto.getR_no()+"/"+dto.getE_no()+"/"+dto.getR_date()
-            +"/"+dto.getR_due_date()+"/"+dto.getR_return_date()+"/"+dto.getR_status()+"/"+dto.getR_condition()+ "|");
+        if (result) {
+            System.out.println("대여 신청이 완료되었습니다.");
+        } else {
+            System.out.println("대여 신청에 실패했습니다.");
         }
-    } // [4] end
+    }
 
+// [4] 내 대여 현황
+public void uRentListPrint(){
 
-    // public void myRentalList() {
-    //     int uNo = LoginController.getInstance().getLoginUser().getU_no();
+    // 로그인한 사용자의 회원번호 가져오기
+    int uNo = LoginController.getInstance().getLoginUser().getU_no();
 
-    //     ArrayList<RentalDTO> list = sc.uRentListPrint(uNo);
+    ArrayList<RentalDTO> userResult = sc.uRentListPrint(uNo);
 
-    //     System.out.println();
-    //     System.out.println("===== 내 대여 현황 =====");
+    System.out.println();
+    System.out.println("===== 내 대여 현황 =====");
+    System.out.println("회원번호 : " + uNo);
 
-    //     if (list.isEmpty()) {
-    //         System.out.println("대여 내역이 없습니다.");
-    //     } else {
-    //         for (RentalDTO dto : list) {
-    //             System.out.println(dto);
-    //         }
-    //     }
-    // }
-
+    if(userResult.isEmpty()){
+        System.out.println("대여 내역이 없습니다.");
+    }
+    else{
+                System.out.printf("%-8s %-8s %-20s %-20s %-12s%n",
+                "대여번호",
+                "장비번호",
+                "대여일",
+                "반납예정일",
+                "상태");
+        for(RentalDTO dto : userResult){
+            System.out.printf("%-8d %-8d %-20s %-20s %-12s%n",
+                 dto.getR_no(),
+                 dto.getE_no(),
+                dto.getR_date(), 
+                dto.getR_due_date(), 
+                dto.getR_return_date(), 
+                dto.getR_status()
+                
+            );
+        }
+    }
+}
 
     // 5. 장비 반납
 

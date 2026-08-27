@@ -17,9 +17,16 @@ public class RentalDTO {
 
     // 대여하기 생성자
     public RentalDTO(int u_no, int e_no) {
-    this.u_no = u_no;
-    this.e_no = e_no;
+        this.u_no = u_no;
+        this.e_no = e_no;
     }   
+
+    // 사용자명 생성자
+    public void run(int u_no){
+    this.u_no = u_no;
+
+    // 기존 메뉴 코드
+    }
 
     //장비반납신청 생성자
     public RentalDTO(int r_no, String r_condition ){

@@ -1,5 +1,10 @@
+import view.ReportView;
+
 public class AppStart {
     public static void main(String[] args) {
-        System.out.println("시작");
+
+        ReportView.getInstance()
+                  .reportAddView(1, 2, "태블릿");
+
     }
 }

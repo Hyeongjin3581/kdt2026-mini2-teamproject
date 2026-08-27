@@ -54,3 +54,10 @@ create table Report (
     constraint primary key (report_id),
     constraint foreign key (r_no) references rental (r_no)
 );
+
+use equipmentrental;
+
+desc report;
+desc rental;
+
+select * from rental where r_no = 1;

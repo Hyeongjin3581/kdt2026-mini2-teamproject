@@ -62,12 +62,8 @@ public class StudentController {
         ArrayList<RentalDTO> result = rd.uRentListPrint(u_no);
         return result;
     }
-
-
-    private static final StudentController instance = new StudentController();
-
-    public static StudentController getInstance() {
-        return instance;
+    
 }
-}
+
+
 

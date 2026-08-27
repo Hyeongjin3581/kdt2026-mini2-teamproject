@@ -197,6 +197,7 @@ public class StudentView {
             return;
         }
 
+        
         // 장비 상태 선택
         System.out.println();
         System.out.println("장비 상태를 선택해주세요.");

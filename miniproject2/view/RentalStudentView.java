@@ -51,8 +51,8 @@ public class RentalStudentView {
         System.out.println("장비번호 입력"); int 장비번호 = scan.nextInt();
         RentalDTO rentalDTO = new RentalDTO(회원번호,장비번호);
         boolean result = sc.rentalAdd(rentalDTO);
-        if( result ){System.out.println("등록성공");}
-        else{System.out.println("등록실패");}
+        if( result ){System.out.println("대여성공");}
+        else{System.out.println("대여실패");}
     }
     //[3] 장비반납신청(사용자)
     public void returnUpdate(){

@@ -253,6 +253,7 @@ public class LockerView {
         } else {
 
             System.out.println("해당 보관함에 장비가 없습니다.");
+            
         }
     }
 }

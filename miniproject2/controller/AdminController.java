@@ -47,8 +47,9 @@ public RentalDTO recentRentalFind(int eNo) {
 }
 
 
-public static AdminController getInstance() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getInstance'");
+    private static final AdminController instance = new AdminController();
+
+    public static AdminController getInstance() {
+        return instance;
 }
 }

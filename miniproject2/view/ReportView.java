@@ -16,8 +16,6 @@ public class ReportView {
 
     private Scanner scan = new Scanner(System.in);
 
-    // Scanner 준비
-
     // 신고 등록 화면 메서드
     public void reportAddView(int rNo) {
 

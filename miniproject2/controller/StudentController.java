@@ -66,3 +66,4 @@ public class StudentController {
     public boolean reportAdd(ReportDTO reportDTO) {
     return reportDAO.report_add(reportDTO);
     }
+}

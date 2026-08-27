@@ -15,6 +15,20 @@ public class RentalDTO {
     // 기본생성자 생성
     public RentalDTO(){}
 
+    // 대여하기 생성자
+    public RentalDTO(int u_no, int e_no) {
+    this.u_no = u_no;
+    this.e_no = e_no;
+    }   
+
+    //장비반납신청 생성자
+    public RentalDTO(int r_no, String r_condition ){
+        this.r_no = r_no;
+        this.r_condition = r_condition;
+    }
+
+
+
     // 매개변수와 매개인자를 받는 생성자 생성
     public RentalDTO(int r_no, int u_no, int e_no,String r_date,String r_due_date,String r_return_date , String r_status, String r_condition){
         this.r_no = r_no;

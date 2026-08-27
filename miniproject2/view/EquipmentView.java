@@ -18,7 +18,6 @@ public class EquipmentView {
     // 입력
     private Scanner scan = new Scanner(System.in);
 
-
     // 장비 메인 메뉴
     public void run() {
 

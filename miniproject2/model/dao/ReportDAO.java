@@ -40,7 +40,7 @@ public class ReportDAO extends BaseDAO{
             String sql = "select report.report_id, report.r_no, report.report_type, "
         + "report.description, rental.r_return_date, report.status "
         + "from report join rental "
-        + "on report.r_no = rental.r_no = ?" ;   // 2.1 SQL 작성한다
+        + "on report.r_no = rental.r_no";   // 2.1 SQL 작성한다
             PreparedStatement ps = conn.prepareStatement( sql ); // 2.2 SQL 기재
             ResultSet rs = ps.executeQuery(); // 2.3 기재된 SQL 실행
             // 2.4 SQL 결과

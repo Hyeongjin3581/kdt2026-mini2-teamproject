@@ -13,4 +13,11 @@ public class StudentController {
         return reportDAO.report_add(reportDTO);
 }
 
+
+    private static final StudentController instance = new StudentController();
+
+    public static StudentController getInstance() {
+        return instance;
 }
+}
+

@@ -14,7 +14,7 @@ public class EquipmentView {
 
 
     // 컨트롤러
-    private AdminController adminController = new AdminController();
+    private AdminController adminController = AdminController.getInstance();
 
     // 입력
     private Scanner scan = new Scanner(System.in);

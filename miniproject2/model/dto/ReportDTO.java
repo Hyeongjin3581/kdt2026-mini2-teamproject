@@ -1,7 +1,5 @@
 package model.dto;
 
-import java.time.LocalDateTime;
-
 public class ReportDTO {
 
     // 1. 데이터베이스 표에서 (CRUD) 사용할 자료들을 private 멤버변수로 구성
@@ -9,17 +7,17 @@ public class ReportDTO {
     private int rNo;
     private String reportType;
     private String description;
-    private LocalDateTime createdAt;
+    private String rReturnDate;
     private String status;
 
     // 2. 기본생성자, 전체매개변수생성자
     public ReportDTO() { }
-    public ReportDTO( int reportId, int rNo, String reportType, String description, LocalDateTime createdAt, String status ){
+    public ReportDTO( int reportId, int rNo, String reportType, String description, String rReturnDate, String status ){
         this.reportId = reportId;
         this.rNo = rNo;
         this.reportType = reportType;
         this.description = description;
-        this.createdAt = createdAt;
+        this.rReturnDate = rReturnDate;
         this.status = status;
     }
 
@@ -48,11 +46,11 @@ public class ReportDTO {
     public void setDescription( String description ) {
         this.description = description;
     }
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public String getrReturnDate() {
+        return rReturnDate;
     }
-    public void setCreatedAt( LocalDateTime createdAt ) {
-        this.createdAt = createdAt;
+    public void setrReturnDate( String rReturnDate ) {
+        this.rReturnDate = rReturnDate;
     }
     public String getStatus() {
         return status;
@@ -64,7 +62,7 @@ public class ReportDTO {
     @Override
     public String toString(){
         return "ReportDTO [ reportId=" + reportId + ", rNo =" + rNo + ", reportType =" + reportType + 
-        ", description =" + description + ", createdAt =" + createdAt + ", status = " + status + "]";
+        ", description =" + description + ", rReturnDate =" + rReturnDate + ", status = " + status + "]";
     }
 
 

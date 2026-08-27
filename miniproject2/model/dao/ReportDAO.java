@@ -1,8 +1,11 @@
 package model.dao;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import model.dto.RentalDTO;
 import model.dto.ReportDTO;
 
 public class ReportDAO extends BaseDAO{
@@ -31,5 +34,182 @@ public class ReportDAO extends BaseDAO{
     } // 등록 end
 
     // [2] 전체조회 DAO
+    public ArrayList<ReportDTO> report_findAll( ){
+        ArrayList<ReportDTO> list = new ArrayList<>(); // 2.7 레코드 정보들을 담을 리스트
+        try {
+            String sql = "select report.report_id, report.r_no, report.report_type, "
+        + "report.description, rental.r_return_date, report.status "
+        + "from report join rental "
+        + "on report.r_no = rental.r_no = ?" ;   // 2.1 SQL 작성한다
+            PreparedStatement ps = conn.prepareStatement( sql ); // 2.2 SQL 기재
+            ResultSet rs = ps.executeQuery(); // 2.3 기재된 SQL 실행
+            // 2.4 SQL 결과
+            while ( rs.next() ) { // rs.next() : 다음 레코드(행) 이동, 마지막 레코드까지 하나씩 타입변환
+                // 2.5 현재 레코드의 필드값들을 --> DTO 변환
+                ReportDTO reportDTO = new ReportDTO();
+                reportDTO.setReportId( rs.getInt("report_id"));
+                reportDTO.setRNo( rs.getInt("r_no"));
+                reportDTO.setReportType( rs.getString("report_type"));
+                reportDTO.setDescription( rs.getString("description"));
+                reportDTO.setrReturnDate( rs.getString("r_return_date")); // 시간 반납일과 같기에 수정
+                reportDTO.setStatus( rs.getString("status"));
+                // 2.6 변환한 DTO --> 리스트에 담기
+                list.add( reportDTO );
+            }
+        } catch ( SQLException e ) {
+            System.out.println(e);
+        } // 2.7 리스트 반환
+        return list;
+    } // 전체조회 end
 
+    // [3] 신고 상세 조회 DAO
+    public ReportDTO report_find(int reportId) {
+
+    try {
+        String sql = "select report.report_id, report.r_no, report.report_type, "
+                + "report.description, rental.r_return_date, report.status "
+                + "from report join rental "
+                + "on report.r_no = rental.r_no "
+                + "where report.report_id = ?";
+
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, reportId);
+        ResultSet rs = ps.executeQuery();
+
+        if(rs.next()) {
+            ReportDTO reportDTO = new ReportDTO();
+
+            reportDTO.setReportId(rs.getInt("report_id"));
+            reportDTO.setRNo(rs.getInt("r_no"));
+            reportDTO.setReportType(rs.getString("report_type"));
+            reportDTO.setDescription(rs.getString("description"));
+            reportDTO.setrReturnDate(rs.getString("r_return_date"));
+            reportDTO.setStatus(rs.getString("status"));
+
+            return reportDTO;
+        }
+    } catch(SQLException e) {
+        System.out.println(e);
+    }
+    return null;
+}
+
+    // [4] 신고 유형별 조회 DAO
+    public ArrayList<ReportDTO> report_typeFind(String reportType) {
+        ArrayList<ReportDTO> list = new ArrayList<>();
+
+    try {
+        String sql = "select report.report_id, report.r_no, report.report_type, "
+                + "report.description, rental.r_return_date, report.status "
+                + "from report join rental "
+                + "on report.r_no = rental.r_no "
+                + "where report.report_type = ?";
+
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setString(1, reportType);
+        ResultSet rs = ps.executeQuery();
+
+        while(rs.next()) {
+
+            ReportDTO reportDTO = new ReportDTO();
+
+            reportDTO.setReportId(rs.getInt("report_id"));
+            reportDTO.setRNo(rs.getInt("r_no"));
+            reportDTO.setReportType(rs.getString("report_type"));
+            reportDTO.setDescription(rs.getString("description"));
+            reportDTO.setrReturnDate(rs.getString("r_return_date"));
+            reportDTO.setStatus(rs.getString("status"));
+
+            list.add(reportDTO);
+        }
+    } catch(SQLException e) {
+        System.out.println(e);
+    }
+    return list;
+    }
+
+    // [5] 처리 상태별 조회
+    public ArrayList<ReportDTO> report_statusFind(String status) {
+        ArrayList<ReportDTO> list = new ArrayList<>();
+
+    try {
+        String sql = "select report.report_id, report.r_no, report.report_type, "
+                + "report.description, rental.r_return_date, report.status "
+                + "from report join rental "
+                + "on report.r_no = rental.r_no "
+                + "where report.status = ?";
+
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setString(1, status);
+        ResultSet rs = ps.executeQuery();
+
+        while(rs.next()) {
+
+            ReportDTO reportDTO = new ReportDTO();
+
+            reportDTO.setReportId(rs.getInt("report_id"));
+            reportDTO.setRNo(rs.getInt("r_no"));
+            reportDTO.setReportType(rs.getString("report_type"));
+            reportDTO.setDescription(rs.getString("description"));
+            reportDTO.setrReturnDate(rs.getString("r_return_date"));
+            reportDTO.setStatus(rs.getString("status"));
+
+            list.add(reportDTO);
+        }
+    } catch(SQLException e) {
+        System.out.println(e);
+    }
+    return list;
+    }  
+
+    // [6] 신고 처리상태 변경
+    public boolean report_statusUpdate(int reportId, String status) {
+    try {
+        String sql = "update report set status = ? where report_id = ?";
+
+        PreparedStatement ps = conn.prepareStatement(sql);
+        
+        ps.setString(1, status);
+        ps.setInt(2,reportId);
+
+        int result = ps.executeUpdate();
+        if ( result == 1 ) return true;
+    } catch(SQLException e) {
+        System.out.println(e);
+    }
+    return false;
+    }
+
+    // [7] 장비 최근 이용내역 조회
+    public RentalDTO recentRental_find(int eNo) {
+
+    try {
+        String sql = "select u_no, r_date, r_return_date "
+                + "from rental "
+                + "where e_no = ? "
+                + "order by r_date desc "
+                + "limit 1";
+
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, eNo);
+
+        ResultSet rs = ps.executeQuery();
+
+        if(rs.next()) {
+
+            RentalDTO rentalDTO = new RentalDTO();
+
+            rentalDTO.setU_no(rs.getInt("u_no"));
+            rentalDTO.setR_date(rs.getString("r_date"));
+            rentalDTO.setR_return_date(rs.getString("r_return_date"));
+
+            return rentalDTO;
+        }
+
+    } catch(SQLException e) {
+        System.out.println(e);
+    }
+
+    return null;
+}
 } // class end

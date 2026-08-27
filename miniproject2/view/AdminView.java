@@ -2,9 +2,13 @@ package view;
 
 import java.util.Scanner;
 
-import view.rentalAdminView.RentalAdminView;
+import view.RentalAdminView;
 
 public class AdminView {
+
+    private  AdminView(){};
+    private static final AdminView instance = new AdminView();
+    public static AdminView getInstance() { return instance; }
 
     private Scanner scan = new Scanner(System.in);
 
@@ -28,7 +32,7 @@ public class AdminView {
             if (ch == 1) {
 
                 // 하위 View 실행
-                RentalAdminView.getInstance().index();
+                RentalAdminView.getInstance().run();
 
             } else if (ch == 2) {
 

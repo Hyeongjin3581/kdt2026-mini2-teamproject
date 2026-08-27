@@ -96,34 +96,7 @@ public class UsersDAO extends BaseDAO {
         return result;
     }
 
-    // 회원 상세 조회
-    public UsersDTO getUserInfo( int u_no ) {
-        UsersDTO user = null;
-        try{
-            String sql = "SELECT * FROM Users WHERE u_no = ? ";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, u_no);
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                user = new UsersDTO(
-                    rs.getInt("u_no"),
-                    rs.getString("u_student_id"),
-                    rs.getString("u_pwd"),
-                    rs.getString("u_name"),
-                    rs.getString("u_phone"),
-                    rs.getString("u_grade")
-                );
-            }
-            rs.close();
-            ps.close();
-        } catch ( Exception e ) {
-            e.printStackTrace();
-        }
-        return user;
-    }
-
-
+    // 전체 회원 조회 (관리자용)
     public ArrayList<UsersDTO> selectAllUsers() {
         ArrayList<UsersDTO> list = new ArrayList<>();
         try {

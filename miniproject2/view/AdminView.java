@@ -62,7 +62,7 @@ public class AdminView {
 
             else if (ch == 2) { // 회원관리
                 // userView 생성 혹은 컨트롤러에서 받아서 활용요망. 
-                AdminUserView.getInstance().run();
+                AdminUserView.getInstance().run(); // 추가 
             } 
             else if (ch == 3) { // 고장 및 파손 신고 관리. ( 해당 메서드 생성한 거 가져와서 하는게 좋을듯.)
                 // ReportView.

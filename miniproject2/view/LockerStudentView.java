@@ -26,12 +26,14 @@ public class LockerStudentView {
 
 
     // 입력
-    private Scanner scan = new Scanner(System.in);
+    private Scanner scan
+            = new Scanner(System.in);
 
 
     // ==============================
-    // 학생 보관함 메인 메뉴
+    // 학생 보관함 메뉴
     // ==============================
+
     public void run() {
 
         while (true) {
@@ -41,8 +43,6 @@ public class LockerStudentView {
             System.out.println("          보관함 조회");
             System.out.println("=============================");
             System.out.println("1. 전체 보관함 조회");
-            System.out.println("2. 보관함 상세 조회");
-            System.out.println("3. 보관함 장비 조회");
             System.out.println("0. 이전 메뉴");
             System.out.println("=============================");
             System.out.print("선택 : ");
@@ -53,14 +53,6 @@ public class LockerStudentView {
             if (ch == 1) {
 
                 l_findAll();
-
-            } else if (ch == 2) {
-
-                l_find();
-
-            } else if (ch == 3) {
-
-                l_equipmentfind();
 
             } else if (ch == 0) {
 
@@ -77,92 +69,90 @@ public class LockerStudentView {
     // ==============================
     // 1. 전체 보관함 조회
     // ==============================
+
     public void l_findAll() {
 
-        ArrayList<Object> list= studentController.l_findAll();
+        ArrayList<Object> list
+                = studentController.l_findAll();
 
 
         System.out.println();
         System.out.println("===== 전체 보관함 조회 =====");
 
 
+        // 보관함이 하나도 없는 경우
         if (list.isEmpty()) {
 
-            System.out.println(
-                    "등록된 보관함이 없습니다."
-            );
-
+            System.out.println("등록된 보관함이 없습니다.");
             return;
         }
 
 
+        // 모든 보관함 출력
         for (Object obj : list) {
 
             LockerDTO lockerDTO
                     = (LockerDTO) obj;
 
-            System.out.println(lockerDTO);
-        }
-    }
 
-
-    // ==============================
-    // 2. 보관함 상세 조회
-    // ==============================
-    public void l_find() {
-
-        System.out.println();
-        System.out.println("===== 보관함 상세 조회 =====");
-
-        System.out.print("보관함 번호 : ");
-        int l_No = scan.nextInt();
-
-
-        LockerDTO lockerDTO
-                = studentController.l_find(l_No);
-
-
-        if (lockerDTO != null) {
-
-            System.out.println(lockerDTO);
-
-        } else {
+            // 보관함 기본 정보
+            System.out.println();
+            System.out.println("-----------------------------");
 
             System.out.println(
-                    "존재하지 않는 보관함입니다."
+                    "보관함 번호 : "
+                    + lockerDTO.getL_No()
             );
-        }
-    }
+
+            System.out.println(
+                    "보관함 위치 : "
+                    + lockerDTO.getL_Location()
+            );
+
+            System.out.println(
+                    "보관함 상태 : "
+                    + lockerDTO.getL_Status()
+            );
 
 
-    // ==============================
-    // 3. 보관함 장비 조회
-    // ==============================
-    public void l_equipmentfind() {
-
-        System.out.println();
-        System.out.println("===== 보관함 장비 조회 =====");
-
-        System.out.print("보관함 번호 : ");
-        int l_No = scan.nextInt();
+            // 해당 보관함에 있는 장비 조회
+            EquipmentDTO equipmentDTO
+                    = studentController.l_equipmentfind(
+                            lockerDTO.getL_No()
+                    );
 
 
-        EquipmentDTO equipmentDTO
-                = studentController.l_equipmentfind(
-                        l_No
+            // 장비가 있는 경우
+            if (equipmentDTO != null) {
+
+                System.out.println(
+                        "장비 번호 : "
+                        + equipmentDTO.getE_No()
                 );
 
+                System.out.println(
+                        "장비 이름 : "
+                        + equipmentDTO.getE_Name()
+                );
 
-        if (equipmentDTO != null) {
+                System.out.println(
+                        "장비 카테고리 : "
+                        + equipmentDTO.getE_Category()
+                );
 
-            System.out.println(equipmentDTO);
+                System.out.println(
+                        "장비 상태 : "
+                        + equipmentDTO.getE_Status()
+                );
 
-        } else {
+            } else {
 
-            System.out.println(
-                    "해당 보관함에 장비가 없습니다."
-            );
+                System.out.println(
+                        "장비 : 등록된 장비 없음"
+                );
+            }
+
+            System.out.println("-----------------------------");
         }
     }
-
 }

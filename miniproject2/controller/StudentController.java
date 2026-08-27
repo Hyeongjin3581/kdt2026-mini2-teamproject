@@ -47,17 +47,10 @@ public class StudentController {
         return lockerDAO.l_findAll();
     }
 
-
-    // 2. 보관함 상세 조회
-    public LockerDTO l_find(int l_No) {
-        return lockerDAO.l_find(l_No);
-    }
-
-
-    // 3. 특정 보관함 장비 조회
-    public EquipmentDTO l_equipmentfind(int l_No) {
-        return lockerDAO.l_equipmentfind(l_No);
-    }
+  // 2. 보관함에 있는 장비 조회
+public EquipmentDTO l_equipmentfind(int l_No) {
+    return lockerDAO.l_equipmentfind(l_No);
+}
 
     // 대여&반납
     // [1] 유효성 검사 조회

@@ -2,8 +2,6 @@ package model.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.util.ArrayList;
-
 
 // 연동 정보
 public  class BaseDAO {

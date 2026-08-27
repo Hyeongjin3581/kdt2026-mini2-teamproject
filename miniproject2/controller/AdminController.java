@@ -74,7 +74,7 @@ public class AdminController {
 
     // 2. 보관함 등록
     public boolean l_add(LockerDTO lockerDTO) {
-        return lockerDAO.i_add(lockerDTO);
+        return lockerDAO.l_add(lockerDTO);
     }
 
     // 3. 전체 보관함 조회
@@ -84,17 +84,17 @@ public class AdminController {
 
     // 4. 보관함 개별 조회
     public LockerDTO l_findByNo(int l_No) {
-        return lockerDAO.findByNo(l_No);
+        return lockerDAO.l_find(l_No);
     }
 
     // 5. 보관함 수정
     public boolean l_update(LockerDTO lockerDTO) {
-        return lockerDAO.update(lockerDTO);
+        return lockerDAO.l_update(lockerDTO);
     }
 
     // 6. 보관함 삭제
     public boolean l_delete(int l_No) {
-        return lockerDAO.delete(l_No);
+        return lockerDAO.l_delete(l_No);
     }
 
     // 7. 보관함 상태 변경

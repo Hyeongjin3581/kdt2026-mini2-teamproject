@@ -31,7 +31,8 @@ public class StudentView {
                 System.out.println("│  3. 장비 대여                           │");
                 System.out.println("│  4. 내 대여 현황                        │");
                 System.out.println("│  5. 장비 반납                           │");
-                System.out.println("│  6. 로그아웃                            │");
+                System.out.println("│  6. 보관함 조회                         │");
+                System.out.println("│  7. 로그아웃                            │");
                 System.out.println("│                                       │");
                 System.out.println("└──────────────────────────────────────┘");
                 System.out.print(" 메뉴 선택 : ");
@@ -49,9 +50,11 @@ public class StudentView {
                 } else if ( ch == 5 ) {
                     returnUpdate();
                 } else if ( ch == 6 ) {
-                    System.out.println("로그아웃");
-                    break;
-                } else {
+                LockerStudentView.getInstance().run();
+                } else if ( ch == 7 ) {
+                 System.out.println("로그아웃");
+                 break;
+                    } else {
                     System.out.println("잘못된 번호입니다.");
                 }
 

@@ -15,8 +15,6 @@ public class RentalStudentView {
 
     // 싱글톤 호출
     private StudentController sc = StudentController.getInstance();
-
-
     private Scanner scan = new Scanner(System.in);
 
     // 임시용 최종 루프 / RentalView 화면 구축. 
@@ -25,7 +23,7 @@ public class RentalStudentView {
             try{
                 System.out.print(
                         "\n==========================================" +
-                        "\n 사용자 대여 관리" +
+                        "\n 사용자 대여&반납 관리" +
                         "\n==========================================" +
                         "\n 1. 대여신청" +
                         "\n 2. 장비반납 신청" +

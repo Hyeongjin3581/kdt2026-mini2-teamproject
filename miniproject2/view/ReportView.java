@@ -1,10 +1,12 @@
 package view;
 
 import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import controller.AdminController;
 import controller.StudentController;
+import model.dto.RentalDTO;
 import model.dto.RentalDTO;
 import model.dto.ReportDTO;
 

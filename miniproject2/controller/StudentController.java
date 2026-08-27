@@ -6,9 +6,9 @@ import model.dao.EquipmentDAO;
 import model.dao.LockerDAO;
 import model.dto.EquipmentDTO;
 
-
 import model.dao.RentalDAO;
 import model.dto.RentalDTO;
+import model.dao.ReportDAO;
 import model.dto.ReportDTO;
 
 public class StudentController {
@@ -16,7 +16,7 @@ public class StudentController {
     public static StudentController getInstance(){return instance;}
 
     private RentalDAO rd = RentalDAO.getInstance();
-
+    private ReportDAO reportDAO = ReportDAO.getInstance();
     private EquipmentDAO equipmentDAO = EquipmentDAO.getInstance();
     private LockerDAO lockerDAO = LockerDAO.getInstance();
 
@@ -64,9 +64,8 @@ public class StudentController {
         return result;
     }
     public boolean reportAdd(ReportDTO reportDTO) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'reportAdd'");
-    }
+    return reportDAO.report_add(reportDTO);
+}
     
 }
 

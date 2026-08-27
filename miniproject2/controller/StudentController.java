@@ -63,8 +63,6 @@ public class StudentController {
         ArrayList<RentalDTO> result = rd.uRentListPrint(u_no);
         return result;
     }
-    
+
+
 }
-
-
-

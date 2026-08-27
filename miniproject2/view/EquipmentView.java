@@ -21,7 +21,7 @@ public class EquipmentView {
 
 
     // 장비 메인 메뉴
-    public void index() {
+    public void run() {
 
         while (true) {
 

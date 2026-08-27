@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import model.dao.EquipmentDAO;
 import model.dao.LockerDAO;
 import model.dto.EquipmentDTO;
-
+import model.dto.LockerDTO;
 import model.dao.RentalDAO;
 import model.dto.RentalDTO;
 import model.dao.ReportDAO;
@@ -82,3 +82,4 @@ public class StudentController {
     public boolean reportAdd(ReportDTO reportDTO) {
     return reportDAO.report_add(reportDTO);
     }
+}

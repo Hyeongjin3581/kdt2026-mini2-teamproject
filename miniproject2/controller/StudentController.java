@@ -63,4 +63,11 @@ public class StudentController {
         return result;
     }
 
+
+    private static final StudentController instance = new StudentController();
+
+    public static StudentController getInstance() {
+        return instance;
 }
+}
+

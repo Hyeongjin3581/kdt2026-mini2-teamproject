@@ -20,7 +20,19 @@ public class ReportView {
     public void reportAddView(int rNo) {
         while( true ){
             try {
-                System.out.println("1. 2. ");
+                System.out.println("┌──────────────────────────────────────────────┐");
+                System.out.println("│               고장 / 파손 신고                │");
+                System.out.println("├──────────────────────────────────────────────┤");
+                System.out.println("│ 장비번호 : TB-002                             │");
+                System.out.println("│ 장비명   : 태블릿                             │");
+                System.out.println("│                                              │");
+                System.out.println("│ 불량 내용 입력                                │");
+                System.out.println("│ : 화면이 계속 깜빡거립니다.                    │");
+                System.out.println("│                                              │");
+                System.out.println("│ 1. 신고 및 반납                               │");
+                System.out.println("│ 2. 취소                                      │");
+                System.out.println("└──────────────────────────────────────────────┘");
+
                 int ch = scan.nextInt();
                 if( ch == 1 )
             } catch (Exception e) {

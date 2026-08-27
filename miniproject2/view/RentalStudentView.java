@@ -8,6 +8,7 @@ import model.dto.RentalDTO;
 import controller.StudentController;
 
 public class RentalStudentView {
+    private int u_no;
     private RentalStudentView(){} // 1.
     private static final RentalStudentView instance = new RentalStudentView(); // 2.
     public static RentalStudentView getInstance(){return instance;} // 3.  
@@ -45,19 +46,28 @@ public class RentalStudentView {
         }
     } // run end
 
+
     // [2] 대여신청 (사용자)
     public void rentalAdd(){
-        System.out.println("회원번호 입력"); int 회원번호 = scan.nextInt();
-        System.out.println("장비번호 입력"); int 장비번호 = scan.nextInt();
-        RentalDTO rentalDTO = new RentalDTO(회원번호,장비번호);
-        boolean result = sc.rentalAdd(rentalDTO);
-        if( result ){System.out.println("등록성공");}
-        else{System.out.println("등록실패");}
+
+    System.out.println("\n========== 대여 신청 ==========");
+    System.out.println("본인의 회원번호 : " + u_no);
+    System.out.print("장비번호 입력 : ");
+    int 장비번호 = scan.nextInt();
+
+    RentalDTO rentalDTO = new RentalDTO(u_no, 장비번호);
+    boolean result = sc.rentalAdd(rentalDTO);
+
+    if(result){
+        System.out.println("등록성공");
+    } else{
+        System.out.println("등록실패");
+        }
     }
     //[3] 장비반납신청(사용자)
     public void returnUpdate(){
         System.out.println("대여번호 입력"); int 대여번호 = scan.nextInt();
-        System.out.println("장비비상태 입력"); String 장비상태 = scan.next();
+        System.out.println("장비상태 입력"); String 장비상태 = scan.next();
         RentalDTO rentalDTO = new RentalDTO( 대여번호,장비상태 );
         boolean result = sc.returnUpdate(rentalDTO);
         if(result){System.out.println("반납성공");}

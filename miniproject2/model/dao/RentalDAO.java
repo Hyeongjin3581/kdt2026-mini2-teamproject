@@ -65,25 +65,57 @@ public class RentalDAO extends BaseDAO {
 
     // [3] 대여 신청
     public boolean rentalAdd(RentalDTO rentalDTO) {
-         String sql = "INSERT INTO rental (u_no, e_no) VALUES (?, ?)";
-        
-        try (PreparedStatement ps = conn.prepareStatement(sql)){
-            // 바인딩
+
+        // 1. 장비 대여 가능 여부 확인
+        String checkSql = "SELECT e_status FROM equipment WHERE e_no = ?";
+
+        try (PreparedStatement checkPs = conn.prepareStatement(checkSql)) {
+            checkPs.setInt(1, rentalDTO.getE_no());
+            try (ResultSet rs = checkPs.executeQuery()) {
+
+                // 장비번호가 존재하는지 확인
+                if (!rs.next()) {
+                    System.out.println("존재하지 않는 장비번호입니다.");
+                    return false;
+                }
+                // 장비 상태 확인
+                String status = rs.getString("e_status");
+
+                if (!status.equals("대여가능")) {
+                    System.out.println("현재 대여할 수 없는 장비입니다.");
+                    System.out.println("현재 장비 상태 : " + status);
+                    return false;
+                }
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+            return false;
+        }
+
+        // 2. 대여 가능한 경우 Rental에 등록
+        String sql = "INSERT INTO rental (u_no, e_no) VALUES (?, ?)";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+
             ps.setInt(1, rentalDTO.getU_no());
             ps.setInt(2, rentalDTO.getE_no());
-            
-            // SQL 실행
-            int result = ps.executeUpdate(); 
-        
-            // 결과 확인
+            int result = ps.executeUpdate();
+
             if (result == 1) {
+                // 3. 대여 성공 → 장비 상태를 대여중으로 변경
+                String updateSql =
+                        "UPDATE equipment SET e_status = '대여중' WHERE e_no = ?";
+                try (PreparedStatement updatePs = conn.prepareStatement(updateSql)) {
+                    updatePs.setInt(1, rentalDTO.getE_no());
+                    updatePs.executeUpdate();
+                }
                 return true;
-            }else{
-                return false;
             }
-        } catch (SQLException e) {System.out.println(e);}
-        return false;
-    } // [3] end
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        } return false;
+    }
 
     //[4] 장비 반납신청
     public boolean returnUpdate(RentalDTO rentalDTO){

@@ -40,7 +40,7 @@ public class AdminView {
 
                 if(ch2 == 1){
                     //[1] 장비 view 실행
-                    EquipmentView.getInstance().run();
+                    EquipmentAdminView.getInstance().run();
                 }
                 else if( ch2 == 2){
                     //[2] 보관함 view 실행 

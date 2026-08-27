@@ -18,6 +18,15 @@ public class ReportView {
 
     // 신고 등록 화면 메서드
     public void reportAddView(int rNo) {
+        while( true ){
+            try {
+                System.out.println("1. 2. ");
+                int ch = scan.nextInt();
+                if( ch == 1 )
+            } catch (Exception e) {
+                // TODO: handle exception
+            }
+        }
 
         // 1. "고장 / 파손 신고" 화면 출력
 

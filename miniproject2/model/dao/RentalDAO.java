@@ -117,45 +117,71 @@ public class RentalDAO extends BaseDAO {
         } return false;
     }
 
-    //[4] 장비 반납신청
+        // [4] 장비 반납
     public boolean returnUpdate(RentalDTO rentalDTO){
-        String sql = "update rental set r_condition = ? , r_status = '반납완료'  WHERE r_no = ?";
+
+        String sql =
+            "UPDATE rental " +
+            "SET r_condition = ?, " +
+            "    r_status = '반납완료', " +
+            "    r_return_date = NOW() " +
+            "WHERE r_no = ?";
+
         try (PreparedStatement ps = conn.prepareStatement(sql)){
 
             ps.setString(1, rentalDTO.getR_condition());
             ps.setInt(2, rentalDTO.getR_no());
 
-            int result = ps.executeUpdate(); 
+            int result = ps.executeUpdate();
 
-            if (result == 1){return true;}
-        } catch (SQLException e) {System.out.println(e);}
+            if(result == 1){
+                return true;
+            }
+
+        } catch(SQLException e){
+            System.out.println(e);
+        }
+
         return false;
-    } // [4] end
+    }
 
-    // [5] 사용자 개인 대여현황 조회 
+        // [5] 사용자 개인 대여현황 조회
     public ArrayList<RentalDTO> uRentListPrint(int u_no) {
+
         ArrayList<RentalDTO> uRentList = new ArrayList<>();
-        String sql = "SELECT r_no, e_no, r_date, r_due_date, r_return_date, r_status, r_condition FROM rental WHERE u_no = ?"; 
+
+        String sql =
+            "SELECT r_no, e_no, r_date, r_due_date, r_return_date, r_status, r_condition " +
+            "FROM rental " +
+            "WHERE u_no = ? AND r_status = '대여중'";
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, u_no); 
+
+            ps.setInt(1, u_no);
 
             try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) { 
-                    RentalDTO rentalDto = new RentalDTO(); 
-                    rentalDto.setR_no(rs.getInt("r_no")); 
+
+                while (rs.next()) {
+
+                    RentalDTO rentalDto = new RentalDTO();
+
+                    rentalDto.setR_no(rs.getInt("r_no"));
                     rentalDto.setE_no(rs.getInt("e_no"));
                     rentalDto.setR_date(rs.getString("r_date"));
                     rentalDto.setR_due_date(rs.getString("r_due_date"));
                     rentalDto.setR_return_date(rs.getString("r_return_date"));
                     rentalDto.setR_status(rs.getString("r_status"));
                     rentalDto.setR_condition(rs.getString("r_condition"));
-                    
+
                     uRentList.add(rentalDto);
                 }
             }
-        } catch (Exception e) {System.out.println(e);}
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
         return uRentList;
-    } // [5] end
+    }
 
 }   // class end

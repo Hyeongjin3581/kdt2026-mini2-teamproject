@@ -54,10 +54,7 @@ public RentalDTO recentRentalFind(int eNo) {
 }
 
 
-public static AdminController getInstance() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getInstance'");
-}
+
 
 // 1. 장비번호 유효성 검사
     public boolean e_NoCheck(int e_No) {
@@ -119,7 +116,7 @@ public static AdminController getInstance() {
     }
 
 
-    // =========================================
+// =========================================
 // 보관함
 // =========================================
 

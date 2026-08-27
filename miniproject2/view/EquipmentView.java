@@ -20,7 +20,7 @@ public class EquipmentView {
     private Scanner scan = new Scanner(System.in);
 
 
-    // 장비 메인 메뉴
+    // 장비 메인 메
     public void run() {
 
         while (true) {

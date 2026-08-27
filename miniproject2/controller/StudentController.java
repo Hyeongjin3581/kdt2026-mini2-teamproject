@@ -5,17 +5,18 @@ import java.util.ArrayList;
 import model.dao.EquipmentDAO;
 import model.dao.LockerDAO;
 import model.dto.EquipmentDTO;
-
-
+import model.dto.LockerDTO;
 import model.dao.RentalDAO;
 import model.dto.RentalDTO;
+import model.dao.ReportDAO;
+import model.dto.ReportDTO;
 
 public class StudentController {
     private static final StudentController instance = new StudentController();
     public static StudentController getInstance(){return instance;}
 
     private RentalDAO rd = RentalDAO.getInstance();
-
+    private ReportDAO reportDAO = ReportDAO.getInstance();
     private EquipmentDAO equipmentDAO = EquipmentDAO.getInstance();
     private LockerDAO lockerDAO = LockerDAO.getInstance();
 
@@ -37,7 +38,23 @@ public class StudentController {
     public ArrayList<EquipmentDTO> e_available() {
         return equipmentDAO.e_available();
     }
-    // 5. 특정 보관함 장비 조회
+
+
+    // 보관함 조회
+
+    // 1. 전체 보관함 조회
+    public ArrayList<Object> l_findAll() {
+        return lockerDAO.l_findAll();
+    }
+
+
+    // 2. 보관함 상세 조회
+    public LockerDTO l_find(int l_No) {
+        return lockerDAO.l_find(l_No);
+    }
+
+
+    // 3. 특정 보관함 장비 조회
     public EquipmentDTO l_equipmentfind(int l_No) {
         return lockerDAO.l_equipmentfind(l_No);
     }
@@ -62,8 +79,7 @@ public class StudentController {
         ArrayList<RentalDTO> result = rd.uRentListPrint(u_no);
         return result;
     }
-    
+    public boolean reportAdd(ReportDTO reportDTO) {
+    return reportDAO.report_add(reportDTO);
+    }
 }
-
-
-

@@ -6,10 +6,12 @@ import model.dao.EquipmentDAO;
 import model.dao.LockerDAO;
 import model.dao.RentalDAO;
 import model.dao.ReportDAO;
+import model.dao.UsersDAO;
 import model.dto.EquipmentDTO;
 import model.dto.LockerDTO;
 import model.dto.RentalDTO;
 import model.dto.ReportDTO;
+import model.dto.UsersDTO;
 
 public class AdminController {
 
@@ -21,6 +23,7 @@ public class AdminController {
     private LockerDAO lockerDAO = LockerDAO.getInstance();
     private RentalDAO rd = RentalDAO.getInstance();
     private ReportDAO reportDAO = ReportDAO.getInstance();
+    private UsersDAO usersDAO = UsersDAO.getInstance();
 
     // ===================== 장비 =====================
 
@@ -37,6 +40,17 @@ public class AdminController {
     // 3. 장비 상세 조회
     public EquipmentDTO e_find(int e_No) {
         return equipmentDAO.e_find(e_No);
+    }
+
+
+    // 4. 장비 카테고리별 조회
+    public ArrayList<EquipmentDTO> e_categoryfind(String e_Category) {
+        return equipmentDAO.e_categoryfind(e_Category);
+    }
+
+    // 5. 대여가능 장비 조회 (대여 조회)
+    public ArrayList<EquipmentDTO> e_available() {
+            return equipmentDAO.e_available();
     }
 
     // 6. 장비 등록
@@ -154,4 +168,11 @@ public class AdminController {
     public ArrayList<RentalDTO> uRentListPrint(int u_no) {
         return rd.uRentListPrint(u_no);
     }
+
+    // ===================== 회원 =====================
+    // 전체 회원 조회 (관리자용)
+    public ArrayList<UsersDTO> selectAllUsers() {
+        return usersDAO.selectAllUsers();
+    }   
+
 }

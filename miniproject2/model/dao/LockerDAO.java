@@ -52,7 +52,7 @@ public class LockerDAO extends BaseDAO {
     // 3. 전체 보관함 조회
         public ArrayList<Object> l_findAll() {
         ArrayList<Object> list = new ArrayList<>();
-        String sql = "SELECT l_No, l_Location, l_StatusFROM lockerORDER BY l_No";
+        String sql = "SELECT l_No, l_Location, l_Status FROM locker ORDER BY l_No";
             try (PreparedStatement pstmt = conn.prepareStatement(sql);
                 ResultSet rs = pstmt.executeQuery()) {
                 while (rs.next()) {
@@ -70,7 +70,7 @@ public class LockerDAO extends BaseDAO {
 
     // 4. 보관함 개별 조회
         public LockerDTO l_find(int l_No) {
-        String sql = "SELECT l_No, l_Location, l_StatusFROM lockerWHERE l_No = ?";
+        String sql = "SELECT l_No, l_Location, l_Status FROM locker WHERE l_No = ?";
             try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setInt(1, l_No);
                 try (ResultSet rs = pstmt.executeQuery()) {
@@ -91,7 +91,7 @@ public class LockerDAO extends BaseDAO {
 
     // 5. 보관함 수정
         public boolean l_update(LockerDTO lockerDTO) {
-        String sql = "UPDATE lockerSET l_Location = ?,l_Status = ? WHERE l_No = ?";
+        String sql = "UPDATE locker SET l_Location = ?, l_Status = ? WHERE l_No = ?";
                 try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, lockerDTO.getL_Location());
                 pstmt.setString(2, lockerDTO.getL_Status());

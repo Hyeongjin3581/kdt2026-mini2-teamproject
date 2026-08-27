@@ -90,9 +90,9 @@ public class LoginView {
             System.out.println("[안내] " + loginUsers.getU_name() + "님 환영합니다.");
 
             if ( loginUsers.getU_grade().equals("admin")) {
-                AdminView.getInstance().index();
+                AdminView.getInstance().run();
             } else {
-                StudentView.getInstance().index();
+                StudentView.getInstance().run();
             }
 
         } else {

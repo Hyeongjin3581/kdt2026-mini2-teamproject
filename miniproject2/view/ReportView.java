@@ -297,9 +297,6 @@ public void recentRentalFindView() {
         scan.nextLine();
     }
 }
-public void reportAdminMenu() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'reportAdminMenu'");
-}
+
 } // class end
 

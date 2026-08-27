@@ -155,35 +155,163 @@ public class StudentView {
         }
     }
 
-    //[3] 장비반납신청(사용자)
+    // [5] 장비 반납 신청
     public void returnUpdate(){
-        System.out.println("대여번호 입력"); int 대여번호 = scan.nextInt();
-        System.out.println("장비상태 입력"); String 장비상태 = scan.next();
-        RentalDTO rentalDTO = new RentalDTO( 대여번호,장비상태 );
-        boolean result = sc.returnUpdate(rentalDTO);
-        if(result){System.out.println("반납성공");}
-        else{System.out.println("반납실패");}
+
+        // 로그인한 사용자 번호 가져오기
+        int uNo = LoginController.getInstance()
+                                .getLoginUser()
+                                .getU_no();
+
+        // 현재 로그인한 사용자의 대여 목록 조회
+        ArrayList<RentalDTO> userResult = sc.uRentListPrint(uNo);
+
+        System.out.println();
+        System.out.println("===============================================================");
+        System.out.println("                       장비 반납");
+        System.out.println("===============================================================");
+        System.out.println(" 현재 대여중인 장비");
+        System.out.println("---------------------------------------------------------------");
+
+        boolean hasRental = false;
+
+        // 대여중인 장비 목록 출력
+        System.out.printf("%-10s %-10s %-22s %-12s%n",
+                "대여번호",
+                "장비번호",
+                "대여일",
+                "상태");
+
+        System.out.println("---------------------------------------------------------------");
+
+        for(RentalDTO dto : userResult){
+
+            // 현재 대여중인 장비만 출력
+            if(dto.getR_status().equals("대여중")){
+
+                hasRental = true;
+
+                System.out.printf("%-10d %-10d %-22s %-12s%n",
+                        dto.getR_no(),
+                        dto.getE_no(),
+                        dto.getR_date(),
+                        dto.getR_status());
+            }
+        }
+
+        System.out.println("---------------------------------------------------------------");
+
+        // 대여중인 장비가 없는 경우
+        if(!hasRental){
+
+            System.out.println(" 현재 대여중인 장비가 없습니다.");
+            System.out.println("===============================================================");
+
+            return;
+        }
+
+        // 반납할 대여번호 입력
+        System.out.print("반납할 대여번호 : ");
+        int 대여번호 = scan.nextInt();
+
+        // 입력한 대여번호가 본인의 대여인지 확인
+        RentalDTO selectedRental = null;
+
+        for(RentalDTO dto : userResult){
+
+            if(dto.getR_no() == 대여번호 &&
+            dto.getR_status().equals("대여중")){
+
+                selectedRental = dto;
+                break;
+            }
+        }
+
+        // 잘못된 대여번호 입력
+        if(selectedRental == null){
+
+            System.out.println();
+            System.out.println("[안내] 잘못된 대여번호입니다.");
+            System.out.println("[안내] 본인이 현재 대여중인 장비의 대여번호를 입력해주세요.");
+            System.out.println("===============================================================");
+
+            return;
+        }
+
+        // 장비 상태 선택
+        System.out.println();
+        System.out.println("장비 상태를 선택해주세요.");
+        System.out.println("1. 정상");
+        System.out.println("2. 이상있음");
+        System.out.print("선택 : ");
+
+        int 상태선택 = scan.nextInt();
+
+        // =========================================================
+        // 1. 정상
+        // =========================================================
+        if(상태선택 == 1){
+
+            RentalDTO rentalDTO = new RentalDTO(
+                    대여번호,
+                    "정상"
+            );
+
+            boolean result = sc.returnUpdate(rentalDTO);
+
+            if(result){
+
+                System.out.println();
+                System.out.println("[안내] 반납이 완료되었습니다.");
+                System.out.println("[안내] 장비번호 : " + selectedRental.getE_no());
+                System.out.println("[안내] 장비상태 : 정상");
+
+            }
+            else{
+
+                System.out.println();
+                System.out.println("[안내] 반납 처리에 실패했습니다.");
+            }
+        }
+
+        // =========================================================
+        // 2. 이상있음
+        // =========================================================
+        else if(상태선택 == 2){
+
+            System.out.println();
+            System.out.println("[안내] 장비에 이상이 발견되었습니다.");
+            System.out.println("[안내] 고장 / 파손 신고 화면으로 이동합니다.");
+
+            // 장비 정보 조회
+            EquipmentDTO equipmentDTO =
+                    sc.e_find(selectedRental.getE_no());
+
+            String eName = "";
+
+            if(equipmentDTO != null){
+                eName = equipmentDTO.getE_Name();
+            }
+            else{
+                eName = "알 수 없는 장비";
+            }
+            // ReportView로 이동
+            ReportView.getInstance().reportAddView(
+                    selectedRental.getR_no(),
+                    selectedRental.getE_no(),
+                    eName
+            );
+        }
+
+        // =========================================================
+        // 잘못된 상태 입력
+        // =========================================================
+        else{
+            System.out.println();
+            System.out.println("[안내] 잘못된 입력입니다.");
+            System.out.println("[안내] 1 또는 2를 선택해주세요.");
+        }
+        System.out.println("===============================================================");
     }
 
-    // public void returnEquipment() {
-    //     System.out.println();
-    //     System.out.println("===== 장비 반납 =====");
-    //     System.out.print("반납할 대여번호 입력 : ");
-    //     int rNo = scan.nextInt();
-
-    //     System.out.print("장비 상태 (정상/이상있음) : ");
-    //     String condition = scan.next();
-
-    //     RentalDTO rentalDTO = new RentalDTO();
-    //     rentalDTO.setR_no(rNo);
-    //     rentalDTO.setR_condition(condition);
-
-    //     boolean result = sc.returnUpdate(rentalDTO);
-
-    //     if (result) {
-    //         System.out.println("반납이 완료되었습니다.");
-    //     } else {
-    //         System.out.println("반납에 실패했습니다.");
-    //     }
-    // }
 }

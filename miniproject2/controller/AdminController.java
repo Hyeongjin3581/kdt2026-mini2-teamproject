@@ -42,6 +42,17 @@ public class AdminController {
         return equipmentDAO.e_find(e_No);
     }
 
+
+    // 4. 장비 카테고리별 조회
+    public ArrayList<EquipmentDTO> e_categoryfind(String e_Category) {
+        return equipmentDAO.e_categoryfind(e_Category);
+    }
+
+    // 5. 대여가능 장비 조회 (대여 조회)
+    public ArrayList<EquipmentDTO> e_available() {
+            return equipmentDAO.e_available();
+    }
+
     // 6. 장비 등록
     public boolean e_add(EquipmentDTO equipmentDTO) {
         return equipmentDAO.e_add(equipmentDTO);

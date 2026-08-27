@@ -2,7 +2,6 @@ package view;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import controller.AdminController;
 import model.dto.EquipmentDTO;
 
@@ -14,13 +13,13 @@ public class EquipmentView {
 
 
     // 컨트롤러
-    private AdminController adminController = new AdminController();
+    private AdminController adminController = AdminController.AdminController();
 
     // 입력
     private Scanner scan = new Scanner(System.in);
 
 
-    // 장비 메인 메
+    // 장비 메인 메뉴
     public void run() {
 
         while (true) {
@@ -75,16 +74,11 @@ public class EquipmentView {
     // 1. 전체 장비 조회
 
     public void e_findAll() {
-
         ArrayList<Object> list = adminController.e_findAll();
-
         System.out.println();
         System.out.println("===== 전체 장비 조회 =====");
-
         for (Object obj : list) {
-
             EquipmentDTO equipmentDTO = (EquipmentDTO) obj;
-
             System.out.println(equipmentDTO);
         }
     }

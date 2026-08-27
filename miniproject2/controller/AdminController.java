@@ -154,10 +154,4 @@ public class AdminController {
     public ArrayList<RentalDTO> uRentListPrint(int u_no) {
         return rd.uRentListPrint(u_no);
     }
-
-    private static final AdminController instance = new AdminController();
-
-    public static AdminController getInstance() {
-        return instance;
-}
 }

@@ -12,15 +12,6 @@ CREATE TABLE Users (
   u_student_id varchar(20) not null unique
 );
 
-CREATE TABLE Equipment (
-    e_no  int auto_increment ,
-    e_name varchar(50) not null,
-    e_category varchar(30),
-    e_status varchar(20) DEFAULT '대여가능',
-    lno int,
-    CONSTRAINT pk_equipment PRIMARY KEY (e_no)
-);
-
 CREATE TABLE Locker (
     l_no int auto_increment ,
     l_location varchar(20) not null ,
@@ -28,13 +19,22 @@ CREATE TABLE Locker (
     PRIMARY KEY (l_no)
 );
 
+CREATE TABLE Equipment (
+    e_no  int auto_increment ,
+    e_name varchar(50) not null,
+    e_category varchar(30),
+    e_status varchar(20) DEFAULT '대여가능',
+    l_no int,
+    CONSTRAINT pk_equipment PRIMARY KEY (e_no)
+);
+
 create table Rental (
     r_no int auto_increment,
     u_no int not null,
     e_no int not null,
     r_date datetime not null default now(),
-    r_due_date datetime not null,
-    r_return_date datetime null,
+    r_due_date datetime not null DEFAULT (now() + interval 2 day),
+    r_return_date datetime null ,
     r_status varchar(10) default '대여중',
     r_condition varchar(10) null,
 

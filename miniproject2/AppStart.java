@@ -1,10 +1,8 @@
-import view.ReportView;
+import view.LoginView;
 
 public class AppStart {
     public static void main(String[] args) {
-
-        ReportView.getInstance()
-                  .reportAddView(1, 2, "태블릿");
-
+        System.out.println("시작");
+        LoginView.getInstance().run();
     }
 }

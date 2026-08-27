@@ -13,7 +13,7 @@ public class StudentView {
     private Scanner scan = new Scanner(System.in);
 
 
-    public void index(){
+    public void run(){
         while (true) {
             try{
                 System.out.println();

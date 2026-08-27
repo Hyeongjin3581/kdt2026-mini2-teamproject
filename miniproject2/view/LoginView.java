@@ -13,7 +13,7 @@ public class LoginView {
     private LoginController lc = LoginController.getInstance();
     private Scanner scan = new Scanner(System.in);
 
-    public void index(){
+    public void run(){
         while (true) {
             try{
                 System.out.println();
@@ -90,9 +90,9 @@ public class LoginView {
             System.out.println("[안내] " + loginUsers.getU_name() + "님 환영합니다.");
 
             if ( loginUsers.getU_grade().equals("admin")) {
-                AdminView.getInstance().index();
+                AdminView.getInstance().run();
             } else {
-                StudentView.getInstance().index();
+                StudentView.getInstance().run();
             }
 
         } else {

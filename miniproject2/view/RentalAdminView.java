@@ -14,9 +14,7 @@ public class RentalAdminView {
 
 
     private AdminController ac = AdminController.getInstance();
-
-
-    // scanner 설정 (테스트용 / 추후 Admin / Student에서 통합 사용)
+    // scanner 설정 
     private Scanner scan = new Scanner(System.in);
 
     // 최종 루프 / RentalView 화면 구축. 

@@ -44,7 +44,7 @@ public class AdminView {
                 }
                 else if( ch2 == 2){
                     //[2] 보관함 view 실행 
-                    LockerView.getInstance().run();
+                    LockerAdminView.getInstance().run();
                 }
                 else if( ch2 == 3 ){
                     //[3] 대여관리 실행

@@ -13,7 +13,7 @@ public class AdminView {
     private Scanner scan = new Scanner(System.in);
 
     // 관리자 메인 화면
-    public void index() {
+    public void run() {
 
         while (true) {
 

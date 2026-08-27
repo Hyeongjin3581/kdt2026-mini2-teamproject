@@ -3,7 +3,6 @@ package model.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.SQLException;
 import java.util.*;
 import model.dto.RentalDTO;
 
@@ -66,7 +65,7 @@ public class RentalDAO extends BaseDAO {
 
     // [3] 대여 신청
     public boolean rentalAdd(RentalDTO rentalDTO) {
-         String sql = "INSERT INTO rental (u_no, e_no, ) VALUES (?, ?)";
+         String sql = "INSERT INTO rental (u_no, e_no) VALUES (?, ?)";
         
         try (PreparedStatement ps = conn.prepareStatement(sql)){
             // 바인딩
@@ -88,7 +87,7 @@ public class RentalDAO extends BaseDAO {
 
     //[4] 장비 반납신청
     public boolean returnUpdate(RentalDTO rentalDTO){
-        String sql = "update rental set r_condition = ? , r_status = '반납완료' ,  WHERE r_no = ?";
+        String sql = "update rental set r_condition = ? , r_status = '반납완료'  WHERE r_no = ?";
         try (PreparedStatement ps = conn.prepareStatement(sql)){
 
             ps.setString(1, rentalDTO.getR_condition());

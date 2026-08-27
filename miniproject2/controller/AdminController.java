@@ -10,6 +10,7 @@ import model.dto.EquipmentDTO;
 import model.dto.LockerDTO;
 import model.dto.RentalDTO;
 import model.dto.ReportDTO;
+import model.dto.ReportDTO;
 
 public class AdminController {
 

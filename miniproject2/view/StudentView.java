@@ -138,20 +138,18 @@ public class StudentView {
             System.out.println("대여 내역이 없습니다.");
         }
         else{
-            System.out.printf("%-8s %-8s %-20s %-20s %-12s%n",
+            System.out.printf("%-8s %-8s %-20s %-20s ",
                     "대여번호",
                     "장비번호",
                     "대여일",
-                    "반납예정일",
-                    "상태");
+                    "반납예정일");
             for(RentalDTO dto : userResult){
-                System.out.printf("%-8d %-8d %-20s %-20s %-12s%n",
+                System.out.printf("%-8d %-8d %-20s %-20s ",
                     dto.getR_no(),
                     dto.getE_no(),
                     dto.getR_date(), 
                     dto.getR_due_date(), 
-                    dto.getR_return_date(), 
-                    dto.getR_status()
+                    dto.getR_return_date()
                     
                 );
             }

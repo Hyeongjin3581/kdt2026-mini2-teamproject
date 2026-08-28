@@ -149,20 +149,16 @@ public class RentalDAO extends BaseDAO {
     public ArrayList<RentalDTO> uRentListPrint(int u_no) {
 
         ArrayList<RentalDTO> uRentList = new ArrayList<>();
-
         String sql =
             "SELECT r_no, e_no, r_date, r_due_date, r_return_date, r_status, r_condition " +
             "FROM rental " +
             "WHERE u_no = ? AND r_status = '대여중'";
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
-
             ps.setInt(1, u_no);
-
             try (ResultSet rs = ps.executeQuery()) {
 
                 while (rs.next()) {
-
                     RentalDTO rentalDto = new RentalDTO();
 
                     rentalDto.setR_no(rs.getInt("r_no"));
@@ -172,15 +168,10 @@ public class RentalDAO extends BaseDAO {
                     rentalDto.setR_return_date(rs.getString("r_return_date"));
                     rentalDto.setR_status(rs.getString("r_status"));
                     rentalDto.setR_condition(rs.getString("r_condition"));
-
                     uRentList.add(rentalDto);
                 }
             }
-
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-
+        } catch (SQLException e) {System.out.println(e);}
         return uRentList;
     }
 

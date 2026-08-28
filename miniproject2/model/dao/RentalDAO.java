@@ -117,31 +117,20 @@ public class RentalDAO extends BaseDAO {
         } return false;
     }
 
-        // [4] 장비 반납
+    // [4] 장비 반납
     public boolean returnUpdate(RentalDTO rentalDTO){
-
         String sql =
             "UPDATE rental " +
             "SET r_condition = ?, " +
             "    r_status = '반납완료', " +
             "    r_return_date = NOW() " +
             "WHERE r_no = ?";
-
         try (PreparedStatement ps = conn.prepareStatement(sql)){
-
             ps.setString(1, rentalDTO.getR_condition());
             ps.setInt(2, rentalDTO.getR_no());
-
             int result = ps.executeUpdate();
-
-            if(result == 1){
-                return true;
-            }
-
-        } catch(SQLException e){
-            System.out.println(e);
-        }
-
+            if(result == 1){return true; }
+        } catch(SQLException e){System.out.println(e);}
         return false;
     }
 

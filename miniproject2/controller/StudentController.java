@@ -83,10 +83,6 @@ public EquipmentDTO l_equipmentfind(int l_No) {
 /////////////////////////////////////////////////////////////
 
 
-
-
-
-
     public boolean reportAdd(ReportDTO reportDTO) {
     return reportDAO.report_add(reportDTO);
     }

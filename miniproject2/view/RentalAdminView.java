@@ -49,16 +49,15 @@ public class RentalAdminView {
         ArrayList<RentalDTO> result = ac.rentalListPrint();
 
         System.out.println();
-        System.out.println("======================================");
-        System.out.println("                              전체 대여 목록");
-        System.out.println("======================================");
+        System.out.println("==============================================================================================");
+        System.out.println("                                      전체 대여 목록");
+        System.out.println("==============================================================================================");
 
         if(result.isEmpty()){
             System.out.println(" 대여 내역이 없습니다.");
         }
         else{
-
-            System.out.printf("%-8s %-8s %-8s %-20s %-20s %-20s %-12s %-10s%n",
+            System.out.printf("%-10s %-10s %-10s %-22s %-22s %-22s %-12s %-10s%n",
                     "대여번호",
                     "회원번호",
                     "장비번호",
@@ -68,11 +67,11 @@ public class RentalAdminView {
                     "대여상태",
                     "장비상태");
 
-            System.out.println("----------------------------------------------------");
+            System.out.println("--------------------------------------------------------------------------------------------------------------");
 
             for(RentalDTO dto : result){
 
-                System.out.printf("%-8d %-8d %-8d %-20s %-20s %-20s %-12s %-10s%n",
+                System.out.printf("%-10d %-10d %-10d %-22s %-22s %-22s %-12s %-10s%n",
                         dto.getR_no(),
                         dto.getU_no(),
                         dto.getE_no(),
@@ -84,7 +83,7 @@ public class RentalAdminView {
             }
         }
 
-        System.out.println("===================================");
+        System.out.println("==============================================================================================");
     }
 
     // [4] 사용자 단일 대여현황 조회 (관리자용)
@@ -96,9 +95,9 @@ public class RentalAdminView {
         ArrayList<RentalDTO> userResult = ac.uRentListPrint(조회번호);
 
         System.out.println();
-        System.out.println("=========================================");
+        System.out.println("==============================================================================================");
         System.out.println("                        사용자 대여 현황");
-        System.out.println("=========================================");
+        System.out.println("==============================================================================================");
         System.out.println(" 회원번호 : " + 조회번호);
         System.out.println("--------------------------------------------------");
 
@@ -107,7 +106,7 @@ public class RentalAdminView {
         }
         else{
 
-            System.out.printf("%-8s %-8s %-20s %-20s %-20s %-12s %-10s%n",
+            System.out.printf("%-10s %-10s %-22s %-22s %-22s %-12s %-10s%n",
                     "대여번호",
                     "장비번호",
                     "대여일",
@@ -116,21 +115,21 @@ public class RentalAdminView {
                     "대여상태",
                     "장비상태");
 
-            System.out.println("--------------------------------------------------------");
+            System.out.println("------------------------------------------------------------------------------------------------");
 
             for(RentalDTO dto : userResult){
 
-                System.out.printf("%-8d %-8d %-20s %-20s %-20s %-12s %-10s%n",
-                        dto.getR_no(),
-                        dto.getE_no(),
-                        dto.getR_date(),
-                        dto.getR_due_date(),
-                        dto.getR_return_date(),
-                        dto.getR_status(),
-                        dto.getR_condition());
+                System.out.printf("%-10d %-10d %-22s %-22s %-22s %-12s %-10s%n",
+                    dto.getR_no(),
+                    dto.getE_no(),
+                    dto.getR_date(),
+                    dto.getR_due_date(),
+                    dto.getR_return_date(),
+                    dto.getR_status(),
+                    dto.getR_condition());
             }
         }
-        System.out.println("=========================================");
+        System.out.println("==============================================================================================");
     }
 }
 

@@ -85,3 +85,5 @@ public class RentalStudentView {
     } // [4] end
 
 } // class end
+
+// 해당 코드는 원본으로, 기능구현 확인으로 사용함.

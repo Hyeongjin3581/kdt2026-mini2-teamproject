@@ -24,7 +24,7 @@ public class RentalDAO extends BaseDAO {
     
     
             ps.setInt(1, r_no);
-            // 4. SQL 실행 및 결과 받아오기  / excute --> 실행 // excuteUpdate --> ps( SQL기재된 인터페이스 SQL 실행)(반환타입 int임.) 성공 : 1 , 실패 : 0
+            // 4. SQL 실행 및 결과 받아오기
             rs = ps.executeQuery();
             if (rs.next()) {
                 result = true;
@@ -75,15 +75,15 @@ public class RentalDAO extends BaseDAO {
 
                 // 장비번호가 존재하는지 확인
                 if (!rs.next()) {
-                    System.out.println("존재하지 않는 장비번호입니다.");
+                    System.out.println("존재하지 않는 장비번호.");
                     return false;
                 }
                 // 장비 상태 확인
                 String status = rs.getString("e_status");
 
                 if (!status.equals("대여가능")) {
-                    System.out.println("현재 대여할 수 없는 장비입니다.");
-                    System.out.println("현재 장비 상태 : " + status);
+                    System.out.println("현재 대여할 수 없는 장비.");
+                    System.out.println("장비 상태 : " + status);
                     return false;
                 }
             }
@@ -93,7 +93,7 @@ public class RentalDAO extends BaseDAO {
             return false;
         }
 
-        // 2. 대여 가능한 경우 Rental에 등록
+        // 2. 대여 가능한 경우 rental 등록
         String sql = "INSERT INTO rental (u_no, e_no) VALUES (?, ?)";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
@@ -102,7 +102,7 @@ public class RentalDAO extends BaseDAO {
             int result = ps.executeUpdate();
 
             if (result == 1) {
-                // 3. 대여 성공 → 장비 상태를 대여중으로 변경
+                // 3. 대여 성공시 장비 상태를 대여중으로 변경
                 String updateSql =
                         "UPDATE equipment SET e_status = '대여중' WHERE e_no = ?";
                 try (PreparedStatement updatePs = conn.prepareStatement(updateSql)) {

@@ -170,9 +170,9 @@ public class StudentView {
         ArrayList<RentalDTO> userResult = sc.uRentListPrint(uNo);
 
         System.out.println();
-        System.out.println("===================================");
+        System.out.println("========================================================");
         System.out.println("              장비 반납");
-        System.out.println("===================================");
+        System.out.println("========================================================");
 
         // 반납할 대여번호 입력
         System.out.print("반납할 대여번호 : ");
@@ -193,11 +193,9 @@ public class StudentView {
             System.out.println();
             System.out.println("[안내] 잘못된 대여번호입니다.");
             System.out.println("[안내] 4번 '내 대여 현황'에서 대여번호를 확인해주세요.");
-            System.out.println("===================================");
+            System.out.println("======================================================");
             return;
         }
-
-        
         // 장비 상태 선택
         System.out.println();
         System.out.println("장비 상태를 선택해주세요.");
@@ -206,9 +204,7 @@ public class StudentView {
         System.out.print("선택 : ");
 
         int 상태선택 = scan.nextInt();
-        // =========================================
-        // 1. 정상
-        // =========================================
+        // 1. 정상 플로우
         if(상태선택 == 1){
 
             RentalDTO rentalDTO = new RentalDTO(
@@ -216,7 +212,6 @@ public class StudentView {
                     "정상"
             );
             boolean result = sc.returnUpdate(rentalDTO);
-
             if(result){
                 System.out.println();
                 System.out.println("[안내] 반납이 완료되었습니다.");
@@ -224,15 +219,12 @@ public class StudentView {
                 System.out.println("[안내] 장비상태 : 정상");
             }
             else{
-
                 System.out.println();
                 System.out.println("[안내] 반납 처리에 실패했습니다.");
             }
         }
 
-        // =========================================
-        // 2. 이상있음
-        // =========================================
+        // 2. 이상있음 플로우
         else if(상태선택 == 2){
             System.out.println();
             System.out.println("[안내] 장비에 이상이 발견되었습니다.");
@@ -257,16 +249,13 @@ public class StudentView {
                     eName
             );
         }
-
-        // =========================================
-        // 잘못된 상태 입력
-        // =========================================
+        // 3. 잘못된 입력 플로우
         else{
             System.out.println();
             System.out.println("[안내] 잘못된 입력입니다.");
             System.out.println("[안내] 1 또는 2를 선택해주세요.");
         }
 
-        System.out.println("===================================");
+        System.out.println("==========================================================");
     }
 }

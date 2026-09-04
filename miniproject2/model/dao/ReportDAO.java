@@ -40,20 +40,20 @@ public class ReportDAO extends BaseDAO{
             String sql = "select report.report_id, report.r_no, report.report_type, "
         + "report.description, rental.r_return_date, report.status "
         + "from report join rental "
-        + "on report.r_no = rental.r_no";   // 2.1 SQL 작성한다
-            PreparedStatement ps = conn.prepareStatement( sql ); // 2.2 SQL 기재
-            ResultSet rs = ps.executeQuery(); // 2.3 기재된 SQL 실행
-            // 2.4 SQL 결과
-            while ( rs.next() ) { // rs.next() : 다음 레코드(행) 이동, 마지막 레코드까지 하나씩 타입변환
-                // 2.5 현재 레코드의 필드값들을 --> DTO 변환
+        + "on report.r_no = rental.r_no";   
+            PreparedStatement ps = conn.prepareStatement( sql ); 
+            ResultSet rs = ps.executeQuery(); 
+            
+            while ( rs.next() ) { 
+                
                 ReportDTO reportDTO = new ReportDTO();
                 reportDTO.setReportId( rs.getInt("report_id"));
                 reportDTO.setRNo( rs.getInt("r_no"));
                 reportDTO.setReportType( rs.getString("report_type"));
                 reportDTO.setDescription( rs.getString("description"));
-                reportDTO.setrReturnDate( rs.getString("r_return_date")); // 시간 반납일과 같기에 수정
+                reportDTO.setrReturnDate( rs.getString("r_return_date")); 
                 reportDTO.setStatus( rs.getString("status"));
-                // 2.6 변환한 DTO --> 리스트에 담기
+                
                 list.add( reportDTO );
             }
         } catch ( SQLException e ) {

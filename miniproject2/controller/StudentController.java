@@ -58,7 +58,7 @@ public class StudentController {
 public EquipmentDTO l_equipmentfind(int l_No) {
     return lockerDAO.l_equipmentfind(l_No);
 }
-
+//////////////////////////////////////////////////////////////////////////////////
     // 대여&반납
     // [1] 유효성 검사 조회
     public boolean rentalNoCheck(int r_no){
@@ -79,6 +79,10 @@ public EquipmentDTO l_equipmentfind(int l_No) {
         ArrayList<RentalDTO> result = rd.uRentListPrint(u_no);
         return result;
     }
+
+/////////////////////////////////////////////////////////////
+
+
     public boolean reportAdd(ReportDTO reportDTO) {
     return reportDAO.report_add(reportDTO);
     }

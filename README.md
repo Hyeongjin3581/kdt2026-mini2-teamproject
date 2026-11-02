@@ -5,7 +5,7 @@
 | 항목 | 내용 |
 | --- | --- |
 | 기간 | 2026.08.18 ~ 08.28 (발표 08.28) |
-| 팀 | 1조 LockAndRoll · 4명 (팀장 박현민 · 김지환 · 안훈석 · 정형진) |
+| 팀 | 4명 |
 | 내 역할 | **대여 & 반납** 기능 (DAO · Controller · View), 관리자 화면, DB 스크립트 수정 |
 | 기술 | Java · JDBC · MySQL · MVC 패턴 · Git |
 | 원본 저장소 | [jihwangim09-design/miniproject2](https://github.com/jihwangim09-design/miniproject2) |
